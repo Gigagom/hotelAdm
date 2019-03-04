@@ -1,0 +1,16 @@
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\hotelAdm.exe.config
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\hotelAdm.exe
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\hotelAdm.pdb
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm.csprojResolveAssemblyReference.cache
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\MainWindow.g.cs
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\App.g.cs
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm_MarkupCompile.cache
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm_MarkupCompile.lref
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\MainWindow.baml
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm.g.resources
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm.Properties.Resources.resources
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm.csproj.GenerateResource.Cache
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm.exe
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm.pdb
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\Dictionary.baml
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\App.baml
