@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Configuration;
 
 namespace hotelAdm
 {
@@ -24,24 +25,31 @@ namespace hotelAdm
         {
             InitializeComponent();
             LoginGrid.Visibility = Visibility.Visible;
+            User.NewUser();
+            Database.NewDB();
+            Database.SetToTextboxes(DBServerSettingsTextbox, DBNameSettingsTextbox, DBUserSettingsTextbox, DBPassSettingsTextbox);
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            User session_user = new User();
-            session_user.SetLabels(NameLabel, PositionLabel);
+            User.SetLabels(NameLabel, PositionLabel);
             LoginGrid.Visibility = Visibility.Hidden;
             ContentGrid.Visibility = Visibility.Visible;
         }
 
         private void SBSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            DBSettings.Visibility = Visibility.Visible;
             Button btn = (Button)sender;
-            if (btn.Background != Brushes.Aqua)
+            if (DBSettings.Visibility != Visibility.Visible)
+            {
                 btn.Background = Brushes.Aqua;
+                DBSettings.Visibility = Visibility.Visible;
+            }
             else
+            {
                 btn.Background = Brushes.White;
+                DBSettings.Visibility = Visibility.Hidden;
+            }     
         }
     }
 }

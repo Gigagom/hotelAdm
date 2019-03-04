@@ -14,3 +14,7 @@ E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAd
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm.pdb
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\Dictionary.baml
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\App.baml
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\Google.Protobuf.dll
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\MySql.Data.dll
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\Google.Protobuf.xml
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\MySql.Data.xml

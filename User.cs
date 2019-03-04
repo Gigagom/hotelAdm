@@ -9,35 +9,35 @@ namespace hotelAdm
 {
     class User
     {
-        string login;
-        string password;
-        string Name;
-        string Position;
-        public User()
+        static string login;
+        static string password;
+        static string Name;
+        static string Position;
+        static public void NewUser()
         {
-            this.login = "Admin";
-            this.password = "Admin";
-            this.Name = "Admin";
-            this.Position = "Admin";
+            User.login = "Admin";
+            User.password = "Admin";
+            User.Name = "Admin";
+            User.Position = "Admin";
         }
-        public User(string login, string password,  string Name, string Position)
+        static public void UpdateUser(string login, string password,  string Name, string Position)
         {
-            this.login = login;
-            this.password = password;
-            this.Name = Name;
-            this.Position = Position;
+            User.login = login;
+            User.password = password;
+            User.Name = Name;
+            User.Position = Position;
         }
         public string GetName()
         {
-            return this.Name;
+            return User.Name;
         }
-        public void SetLabels(Label LName, Label LPosition)
+        static public void SetLabels(Label LName, Label LPosition)
         {
-            LName.Content = this.Name;
-            LPosition.Content = this.Position;
+            LName.Content = User.Name;
+            LPosition.Content = User.Position;
         }
 
-        public void UpdateUser()
+        static public void UpdateUser()
         {
 
         }
