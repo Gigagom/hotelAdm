@@ -14,12 +14,12 @@ namespace hotelAdm
             try
             {
                 var appSettings = ConfigurationManager.AppSettings;
-                string result = appSettings[key] ?? "Not Found";
+                string result = appSettings[key] ?? "Не найдено";
                 return result;
             }
             catch (ConfigurationErrorsException)
             {
-                return"Error reading app settings";
+                return"Ошибка чтения данных";
             }
         }
         public static void AddUpdateAppSettings(string key, string value)
@@ -41,8 +41,10 @@ namespace hotelAdm
             }
             catch (ConfigurationErrorsException)
             {
-                Console.WriteLine("Error writing app settings");
+                throw new ConfigChangeException("Ошибка сохранения параметров!");
             }
         }
     }
+
+    
 }

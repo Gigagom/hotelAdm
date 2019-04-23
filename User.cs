@@ -3,43 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace hotelAdm
 {
     class User
     {
-        static string login;
-        static string password;
-        static string Name;
-        static string Position;
-        static public void NewUser()
-        {
-            User.login = "Admin";
-            User.password = "Admin";
-            User.Name = "Admin";
-            User.Position = "Admin";
-        }
-        static public void UpdateUser(string login, string password,  string Name, string Position)
-        {
-            User.login = login;
-            User.password = password;
-            User.Name = Name;
-            User.Position = Position;
-        }
-        public string GetName()
-        {
-            return User.Name;
-        }
-        static public void SetLabels(Label LName, Label LPosition)
-        {
-            LName.Content = User.Name;
-            LPosition.Content = User.Position;
-        }
+        public static string[] UsersKeysForSelects = new string[] { "id",
+                                                                    "login",
+                                                                    "password",
+                                                                    "FIO",
+                                                                    "type",
+                                                                    "position_name"};
+        public int id { get; set; }
+        public string login { get; set; }
+        public string password { get; set; }
+        public string FIO { get; set; }
+        public string type { get; set; }
+        public string position_name { get; set; }
 
-        static public void UpdateUser()
+        public User(int Id, string Login, string Password, string Fio, string Type, string Position)
         {
-
+            id = Id;
+            login = Login;
+            password = Password;
+            FIO = Fio;
+            type = Type;
+            position_name = Position;
         }
     }
 }

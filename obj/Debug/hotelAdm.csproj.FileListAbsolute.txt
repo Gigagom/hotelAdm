@@ -18,3 +18,6 @@ E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\Google.
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\MySql.Data.dll
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\Google.Protobuf.xml
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\MySql.Data.xml
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\WpfAnimatedGif.dll
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\WpfAnimatedGif.xml
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\GeneratedInternalTypeHelper.g.cs

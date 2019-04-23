@@ -4,15 +4,25 @@
     <Style x:Key="LoginTextBoxes" TargetType="{x:Type TextBox}">
         <Setter Property="Margin" Value="30,5,30,5"/>
         <Setter Property="FontSize" Value="45"/>
-        <Setter Property="TextAlignment" Value="Center"/>
     </Style>
-    
+
+    <Style x:Key="PasswordboxStyle" TargetType="PasswordBox">
+        <Setter Property="Margin" Value="30,5,30,5"/>
+        <Setter Property="FontSize" Value="45"/>
+    </Style>
+
     <ControlTemplate x:Key="LoginTextBoxesBorder" TargetType="{x:Type TextBox}">
         <Border Background="{TemplateBinding Background}"  BorderBrush="Black" BorderThickness="1" CornerRadius="6">
             <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
         </Border>
     </ControlTemplate>
-    
+
+    <ControlTemplate x:Key="PasswordboxBorder" TargetType="{x:Type PasswordBox}">
+        <Border Background="{TemplateBinding Background}"  BorderBrush="Black" BorderThickness="1" CornerRadius="6">
+            <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+        </Border>
+    </ControlTemplate>
+
     <Style x:Key="ForMenuButtons" TargetType="{x:Type Button}">
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
@@ -22,6 +32,40 @@
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Margin" Value="5,15,5,15"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="ForAddBtn" TargetType="{x:Type Button}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="6"/>
+            </Style>
+        </Style.Resources>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Background" Value="Green"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style x:Key="ForEditBtn" TargetType="{x:Type Button}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="6"/>
+            </Style>
+        </Style.Resources>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Background" Value="Orange"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style x:Key="ForDeleteBtn" TargetType="{x:Type Button}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="6"/>
+            </Style>
+        </Style.Resources>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Background" Value="Red"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
@@ -39,6 +83,7 @@
                 <Setter Property="CornerRadius" Value="4,0,0,4"/>
             </Style>
         </Style.Resources>
+        <Setter Property="FontSize" Value="11.5"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="Margin" Value="0,0,5,15"/>
