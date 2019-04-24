@@ -20,6 +20,7 @@ namespace hotelAdm
 
         public static void TakeAllUsers(DataGrid DG)
         {
+            UsersList.Clear();
             string query = "call hotel.Select_All_Users();";
             List<Dictionary<string, string>> UR = Database.Select(query, User.UsersKeysForSelects);
             if (UR.Count != 0)
@@ -46,7 +47,18 @@ namespace hotelAdm
             }
         }
 
-
+        public static void DeleteUser(int id)
+        {
+            string query = $"DELETE FROM `hotel`.`users` WHERE (`id` = '{id.ToString()}');";
+            try
+            {
+                Database.Delete(query);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
     class CurrrentUser
     {

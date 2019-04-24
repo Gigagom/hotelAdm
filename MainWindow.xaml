@@ -102,7 +102,7 @@
                                     <Grid Grid.Column="1" Grid.Row="1">
                                         <ScrollViewer>
                                             <DataGrid  x:Name="usersDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
-    RowBackground="LightGray" AlternatingRowBackground="White" SelectionChanged="usersDataGrid_SelectionChanged" LostFocus="usersDataGrid_LostFocus" >
+    RowBackground="LightGray" AlternatingRowBackground="White">
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="ID" Binding="{Binding Path=id}"/>
                                                     <DataGridTextColumn Header="Логин" Binding="{Binding Path=login}"/>
@@ -114,7 +114,7 @@
                                             </DataGrid>
                                         </ScrollViewer>
                                     </Grid>
-                                    <Grid x:Name="UsersControlBtnGrid" Grid.Column="1" Grid.Row="2">
+                                    <Grid x:Name="UsersControlBtnGrid" Grid.Column="1" Grid.Row="2" Background="White">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="*"/>
@@ -130,8 +130,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <Button x:Name="AddUserBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}"/>
-                                        <Button x:Name="UpdateUserBtn" Content="Изменить" IsEnabled="False" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Grid.ColumnSpan="2" Margin="4.2,0,67.4,95.8" Grid.RowSpan="2" Click="UpdateUserBtn_Click"/>
-                                        <Button x:Name="DeleteUserBtn" Content="Удалить" IsEnabled="False" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}"/>
+                                        <Button x:Name="UpdateUserBtn" Content="Изменить" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Grid.ColumnSpan="2" Margin="4.2,0,67.4,95.8" Grid.RowSpan="2" Click="UpdateUserBtn_Click"/>
+                                        <Button x:Name="DeleteUserBtn" Content="Удалить" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}" Click="DeleteUserBtn_Click"/>
                                     </Grid>
                                     <Grid x:Name="UpdateUserGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
                                         <Grid.RowDefinitions>
@@ -164,7 +164,7 @@
                                     <Grid Grid.Column="1" Grid.Row="1">
                                         <ScrollViewer>
                                             <DataGrid  x:Name="ApartsDataGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
-    RowBackground="LightGray" AlternatingRowBackground="White" SelectionChanged="ApartsDataGrid_SelectionChanged" LostFocus="ApartsDataGrid_LostFocus" >
+    RowBackground="LightGray" AlternatingRowBackground="White">
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="ID" Binding="{Binding Path=id}"/>
                                                     <DataGridTextColumn Header="Количество комнат" Binding="{Binding Path=countOfRooms}"/>
@@ -192,8 +192,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <Button x:Name="AddApartBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}"/>
-                                        <Button x:Name="UpdateApartBtn" Content="Изменить" IsEnabled="False" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Grid.ColumnSpan="2" Margin="4.2,0,67.4,95.8" Grid.RowSpan="2" Click="UpdateUserBtn_Click"/>
-                                        <Button x:Name="DeleteApartBtn" Content="Удалить" IsEnabled="False" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}"/>
+                                        <Button x:Name="UpdateApartBtn" Content="Изменить" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Grid.ColumnSpan="2" Margin="4.2,0,67.4,95.8" Grid.RowSpan="2" Click="UpdateUserBtn_Click"/>
+                                        <Button x:Name="DeleteApartBtn" Content="Удалить" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}" Click="DeleteApartBtn_Click"/>
                                     </Grid>
                                     <Grid x:Name="UpdateApartGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
                                         <Grid.RowDefinitions>

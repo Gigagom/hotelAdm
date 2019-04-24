@@ -16,6 +16,7 @@ namespace hotelAdm
 
         public static void TakeApartments()
         {
+            Apartsments.Clear();
             try
             {
                 string query = "call hotel.GetAparts();";
@@ -50,6 +51,19 @@ namespace hotelAdm
             foreach(KeyValuePair<int, Apartment> a in Apartsments)
             {
                 dg.Items.Add(a.Value);
+            }
+        }
+
+        public static void DeleteApartsment(int id)
+        {
+            string query = $"DELETE FROM `hotel`.`hotel_apart` WHERE (`id` = '{id.ToString()}');";
+            try
+            {
+                Database.Delete(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

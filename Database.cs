@@ -168,6 +168,10 @@ namespace hotelAdm
                     cmd.ExecuteNonQuery();
                 }
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
             finally
             {
                 Database.CloseConnection();

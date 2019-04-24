@@ -161,6 +161,8 @@ namespace hotelAdm
 
         public void DrawButtons(Grid Target, double count, double columns, RoutedEventHandler hadler)
         {
+            Target.Children.Clear();
+            Target.ColumnDefinitions.Clear();
             int number = 1;
             double c = count / columns;
             double rows = Math.Round(c, 0, MidpointRounding.AwayFromZero);
@@ -255,51 +257,79 @@ namespace hotelAdm
             }
         }
 
-        private void SetButtonUnenabled(Button btn)
-        {
-            if (btn.IsEnabled)
-            {
-                btn.IsEnabled = false;
-            }
-
-        }
-
-        private void SetButtonToEnabled(Button btn)
-        {
-            if (!btn.IsEnabled)
-            {
-                btn.IsEnabled = true;
-            }
-
-        }
-
-        private void usersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SetButtonToEnabled(UpdateUserBtn);
-            SetButtonToEnabled(DeleteUserBtn);
-        }
-
-        private void usersDataGrid_LostFocus(object sender, RoutedEventArgs e)
-        {
-            SetButtonUnenabled(UpdateUserBtn);
-            SetButtonUnenabled(DeleteUserBtn);
-        }
-
         private void UpdateUserBtn_Click(object sender, RoutedEventArgs e)
         {
             UpdateUserGrid.Visibility = Visibility.Visible;
         }
 
-        private void ApartsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DeleteUserBtn_Click(object sender, RoutedEventArgs e)
         {
-            SetButtonToEnabled(UpdateApartBtn);
-            SetButtonToEnabled(DeleteApartBtn);
+            User u = (User)usersDataGrid.SelectedItem;
+            if (u!=null)
+            {
+                MessageBoxResult rt = MessageBox.Show($"Удалить пользователя с id={u.id.ToString()}?", "Удаление", MessageBoxButton.YesNo);
+                switch (rt)
+                {
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Load(true);
+                            usersDataGrid.Items.Clear();
+                            Users.DeleteUser(u.id);
+                            Users.TakeAllUsers(usersDataGrid);
+                            Load(false);
+                            MessageBox.Show("Пользователь успешно удален");
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show(ex.Message,"Ошибка");
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите пользователя!");
+            }
+            usersDataGrid.SelectedItem = null;
         }
 
-        private void ApartsDataGrid_LostFocus(object sender, RoutedEventArgs e)
+        private void DeleteApartBtn_Click(object sender, RoutedEventArgs e)
         {
-            SetButtonUnenabled(UpdateApartBtn);
-            SetButtonUnenabled(DeleteApartBtn);
+            Apartment a = (Apartment)ApartsDataGrid.SelectedItem;
+            if (a != null)
+            {
+                MessageBoxResult rt = MessageBox.Show($"Удалить номер с id={a.id.ToString()}?", "Удаление", MessageBoxButton.YesNo);
+                switch (rt)
+                {
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Load(true);
+                            ApartsDataGrid.Items.Clear();
+                            HotelApartments.DeleteApartsment(a.id);
+                            HotelApartments.TakeApartments();
+                            HotelApartments.SetApartmentsToGrid(ApartsDataGrid);
+                            DrawButtons(ApartsBtnGrid, HotelApartments.ApartmentsCount, 4, ShowNumberInfo);
+                            Load(false);
+                            MessageBox.Show("Номер успешно удален");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка");
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите номер!");
+            }
+            ApartsDataGrid.SelectedItem = null;
         }
     }
 }
