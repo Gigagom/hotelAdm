@@ -114,7 +114,7 @@
                                             </DataGrid>
                                         </ScrollViewer>
                                     </Grid>
-                                    <Grid x:Name="UsersControlBtnGrid" Grid.Column="1" Grid.Row="2" Background="White">
+                                    <Grid x:Name="UsersControlBtnGrid" Grid.Column="1" Grid.Row="2" Background="White" Visibility="Visible">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="*"/>
@@ -129,18 +129,95 @@
                                             <ColumnDefinition Width="2*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Button x:Name="AddUserBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}"/>
-                                        <Button x:Name="UpdateUserBtn" Content="Изменить" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Grid.ColumnSpan="2" Margin="4.2,0,67.4,95.8" Grid.RowSpan="2" Click="UpdateUserBtn_Click"/>
+                                        <Button x:Name="AddUserBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}" Click="AddUserBtn_Click"/>
+                                        <Button x:Name="UpdateUserBtn" Content="Изменить" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Click="UpdateUserBtn_Click"/>
                                         <Button x:Name="DeleteUserBtn" Content="Удалить" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}" Click="DeleteUserBtn_Click"/>
+                                    </Grid>
+                                    <Grid x:Name="CreateUserGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="Добавление пользователя" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <StackPanel x:Name="CreateUserLoginPanel" Grid.Row="1">
+                                            <Label Content="Логин"/>
+                                            <TextBox x:Name="CreateUserLoginTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateUserPasswordPanel" Grid.Row="1" Grid.Column="2">
+                                            <Label Content="Пароль"/>
+                                            <TextBox x:Name="CreateUserPasswordTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateUserFIOPanel" Grid.Row="1" Grid.Column="4">
+                                            <Label Content="ФИО"/>
+                                            <TextBox x:Name="CreateUserFIOTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateUserTypePanel" Grid.Row="1" Grid.Column="6">
+                                            <Label Content="Тип"/>
+                                            <ComboBox x:Name="CreateUserTypeTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateUserPositionPanel" Grid.Row="1" Grid.Column="8">
+                                            <Label Content="Должность"/>
+                                            <ComboBox x:Name="CreateUserPositionTextBox"/>
+                                        </StackPanel>
+                                        <Button x:Name="CreateUserCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="CreateUserCanselBtn_Click"/>
+                                        <Button x:Name="CreateUserSaveBtn" Content="Сохранить" Grid.Column="8" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="CreateUserSaveBtn_Click"/>
                                     </Grid>
                                     <Grid x:Name="UpdateUserGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
                                             <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
                                         </Grid.ColumnDefinitions>
+                                        <Label Content="Редактирование пользователя" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <StackPanel x:Name="UpdateUserLoginPanel" Grid.Row="1">
+                                            <Label Content="Логин"/>
+                                            <TextBox x:Name="UpdateUserLoginTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="UpdateUserPasswordPanel" Grid.Row="1" Grid.Column="2">
+                                            <Label Content="Пароль"/>
+                                            <TextBox x:Name="UpdateUserPasswordTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="UpdateUserFIOPanel" Grid.Row="1" Grid.Column="4">
+                                            <Label Content="ФИО"/>
+                                            <TextBox x:Name="UpdateUserFIOTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="UpdateUserTypePanel" Grid.Row="1" Grid.Column="6">
+                                            <Label Content="Тип"/>
+                                            <ComboBox x:Name="UpdateUserTypeTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="UpdateUserPositionPanel" Grid.Row="1" Grid.Column="8">
+                                            <Label Content="Должность"/>
+                                            <ComboBox x:Name="UpdateUserPositionTextBox"/>
+                                        </StackPanel>
+                                        <Button x:Name="UpdateUserCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="UpdateUserCanselBtn_Click"/>
+                                        <Button x:Name="UpdateUserSaveBtn" Content="Сохранить" Grid.Column="8" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="UpdateUserSaveBtn_Click"/>
                                     </Grid>
                                 </Grid>
                             </TabItem.Content>
@@ -191,18 +268,109 @@
                                             <ColumnDefinition Width="2*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Button x:Name="AddApartBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}"/>
-                                        <Button x:Name="UpdateApartBtn" Content="Изменить" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Grid.ColumnSpan="2" Margin="4.2,0,67.4,95.8" Grid.RowSpan="2" Click="UpdateUserBtn_Click"/>
+                                        <Button x:Name="AddApartBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}" Click="AddApartBtn_Click"/>
+                                        <Button x:Name="UpdateApartBtn" Content="Изменить" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Click="UpdateApartBtn_Click"/>
                                         <Button x:Name="DeleteApartBtn" Content="Удалить" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}" Click="DeleteApartBtn_Click"/>
                                     </Grid>
                                     <Grid x:Name="UpdateApartGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
                                             <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
                                         </Grid.ColumnDefinitions>
+                                        <Label x:Name="UpdateApartLabel" Content="Редактирование Номера №" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <Grid Grid.Row="1" Grid.ColumnSpan="9">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel x:Name="UpdateApartRoomsPanel">
+                                                <Label Content="Количество комнат"/>
+                                                <TextBox x:Name="UpdateApartRoomsTextBox"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="UpdateApartTypePanel" Grid.Column="2">
+                                                <Label Content="Тип номера"/>
+                                                <ComboBox x:Name="UpdateApartTypeTextBox"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="UpdateApartTimePanel" Grid.Column="4">
+                                                <Label Content="Время уборки"/>
+                                                <ComboBox x:Name="UpdateApartTimeTextBox"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="UpdateApartCostPanel" Grid.Column="6">
+                                                <Label Content="Цена"/>
+                                                <TextBox x:Name="UpdateApartCostTextBox"/>
+                                            </StackPanel>
+                                        </Grid>                                                                               
+                                        <Button x:Name="UpdateApartCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="UpdateApartCanselBtn_Click"/>
+                                        <Button x:Name="UpdateApartSaveBtn" Content="Сохранить" Grid.Column="8" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="UpdateApartSaveBtn_Click"/>
+                                    </Grid>
+                                    <Grid x:Name="CreateApartGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label x:Name="CreateApartLabel" Content="Создание Номера" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <Grid Grid.Row="1" Grid.ColumnSpan="9">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel x:Name="CreateApartRoomsPanel">
+                                                <Label Content="Количество комнат"/>
+                                                <TextBox x:Name="CreateApartRoomsTextBox"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="CreateApartTypePanel" Grid.Column="2">
+                                                <Label Content="Тип номера"/>
+                                                <ComboBox x:Name="CreateApartTypeTextBox"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="CreateApartTimePanel" Grid.Column="4">
+                                                <Label Content="Время уборки"/>
+                                                <ComboBox x:Name="CreateApartTimeTextBox"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="CreateApartCostPanel" Grid.Column="6">
+                                                <Label Content="Цена"/>
+                                                <TextBox x:Name="CreateApartCostTextBox"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Button x:Name="CreateApartCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="CreateApartCanselBtn_Click"/>
+                                        <Button x:Name="CreateApartSaveBtn" Content="Сохранить" Grid.Column="8" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="CreateApartSaveBtn_Click"/>
                                     </Grid>
                                 </Grid>
                             </TabItem.Content>
@@ -232,11 +400,11 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="1" Content="Номера" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
                     <Grid Grid.Row="1" Grid.Column="1" x:Name="ApartsBtnGrid">
-                        
+
                     </Grid>
                 </Grid>
                 <Grid x:Name="NewOfferGrid" Visibility="Hidden">
-                    
+
                 </Grid>
                 <Grid x:Name="OfferListGrid" Visibility="Hidden">
 

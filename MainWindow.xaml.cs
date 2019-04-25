@@ -259,7 +259,22 @@ namespace hotelAdm
 
         private void UpdateUserBtn_Click(object sender, RoutedEventArgs e)
         {
-            UpdateUserGrid.Visibility = Visibility.Visible;
+            User u = (User)usersDataGrid.SelectedItem;
+            if (u != null)
+            {
+                UpdateUserLoginTextBox.Text = u.login;
+                UpdateUserPasswordTextBox.Text = u.password;
+                UpdateUserFIOTextBox.Text = u.FIO;
+                UpdateUserTypeTextBox.Items.Clear();
+                UpdateUserPositionTextBox.Items.Clear();
+                UsersControlBtnGrid.Visibility = Visibility.Hidden;
+                UpdateUserGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Выберите пользователя!");
+            }
+            usersDataGrid.SelectedItem = null;
         }
 
         private void DeleteUserBtn_Click(object sender, RoutedEventArgs e)
@@ -330,6 +345,99 @@ namespace hotelAdm
                 MessageBox.Show("Выберите номер!");
             }
             ApartsDataGrid.SelectedItem = null;
+        }
+
+        private void AddUserBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UsersControlBtnGrid.Visibility = Visibility.Hidden;
+            CreateUserGrid.Visibility = Visibility.Visible;
+        }
+        //Кнопки на панели создания нового пользователя
+        private void CreateUserCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateUserLoginTextBox.Clear();
+            CreateUserPasswordTextBox.Clear();
+            CreateUserFIOTextBox.Clear();
+            CreateUserTypeTextBox.Items.Clear();
+            CreateUserPositionTextBox.Items.Clear();
+            UsersControlBtnGrid.Visibility = Visibility.Visible;
+            CreateUserGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void CreateUserSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        //Кнопки на панели редактирования пользователя
+        private void UpdateUserCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateUserLoginTextBox.Clear();
+            UpdateUserPasswordTextBox.Clear();
+            UpdateUserFIOTextBox.Clear();
+            UpdateUserTypeTextBox.Items.Clear();
+            UpdateUserPositionTextBox.Items.Clear();
+            UsersControlBtnGrid.Visibility = Visibility.Visible;
+            UpdateUserGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void UpdateUserSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateApartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Apartment a = (Apartment)ApartsDataGrid.SelectedItem;
+            if (a != null)
+            {
+                UpdateApartLabel.Content += a.id.ToString();
+                UpdateApartRoomsTextBox.Text = a.countOfRooms.ToString();
+                UpdateApartCostTextBox.Text = a.price.ToString();
+                ApartControlBtnGrid.Visibility = Visibility.Hidden;
+                UpdateApartGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Выберите номер!");
+            }
+            ApartsDataGrid.SelectedItem = null;
+        }
+        //Кнопки на панели редактирования номера
+        private void UpdateApartCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateApartLabel.Content = "Редактирование Номера №";
+            UpdateApartRoomsTextBox.Clear();
+            UpdateApartTypeTextBox.Items.Clear();
+            UpdateApartTimeTextBox.Items.Clear();
+            UpdateApartCostTextBox.Clear();
+            ApartControlBtnGrid.Visibility = Visibility.Visible;
+            UpdateApartGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void UpdateApartSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddApartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ApartControlBtnGrid.Visibility = Visibility.Hidden;
+            CreateApartGrid.Visibility = Visibility.Visible;
+        }
+        //Кнопки на панели создания нового номера
+        private void CreateApartCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateApartRoomsTextBox.Clear();
+            CreateApartTypeTextBox.Items.Clear();
+            CreateApartTimeTextBox.Items.Clear();
+            CreateApartCostTextBox.Clear();
+            ApartControlBtnGrid.Visibility = Visibility.Visible;
+            CreateApartGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void CreateApartSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
