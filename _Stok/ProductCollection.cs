@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace hotelAdm
 {
-    class DataNavigator
+    class ProductCollection
     {
     }
 }

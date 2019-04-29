@@ -102,7 +102,7 @@
                                     <Grid Grid.Column="1" Grid.Row="1">
                                         <ScrollViewer>
                                             <DataGrid  x:Name="usersDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
-    RowBackground="LightGray" AlternatingRowBackground="White">
+    RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="ID" Binding="{Binding Path=id}"/>
                                                     <DataGridTextColumn Header="Логин" Binding="{Binding Path=login}"/>
@@ -167,11 +167,11 @@
                                         </StackPanel>
                                         <StackPanel x:Name="CreateUserTypePanel" Grid.Row="1" Grid.Column="6">
                                             <Label Content="Тип"/>
-                                            <ComboBox x:Name="CreateUserTypeTextBox"/>
+                                            <ComboBox x:Name="CreateUserTypeTextBox" IsEditable="True" IsReadOnly="True" Text="Выберите"/>
                                         </StackPanel>
-                                        <StackPanel x:Name="CreateUserPositionPanel" Grid.Row="1" Grid.Column="8">
+                                        <StackPanel x:Name="CreateUserPositionPanel"  Grid.Row="1" Grid.Column="8">
                                             <Label Content="Должность"/>
-                                            <ComboBox x:Name="CreateUserPositionTextBox"/>
+                                            <ComboBox x:Name="CreateUserPositionTextBox" IsEditable="True" IsReadOnly="True" Text="Выберите"/>
                                         </StackPanel>
                                         <Button x:Name="CreateUserCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="CreateUserCanselBtn_Click"/>
                                         <Button x:Name="CreateUserSaveBtn" Content="Сохранить" Grid.Column="8" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="CreateUserSaveBtn_Click"/>
@@ -241,14 +241,13 @@
                                     <Grid Grid.Column="1" Grid.Row="1">
                                         <ScrollViewer>
                                             <DataGrid  x:Name="ApartsDataGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
-    RowBackground="LightGray" AlternatingRowBackground="White">
+    RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="ID" Binding="{Binding Path=id}"/>
                                                     <DataGridTextColumn Header="Количество комнат" Binding="{Binding Path=countOfRooms}"/>
-                                                    <DataGridTextColumn Header="Тпи номера" Binding="{Binding Path=roomType}"/>
+                                                    <DataGridTextColumn Header="Тип номера" Binding="{Binding Path=roomType}"/>
                                                     <DataGridTextColumn Header="Время уборки" Binding="{Binding Path=cleaningTime}"/>
                                                     <DataGridTextColumn Header="Цена" Binding="{Binding Path=price}"/>
-                                                    <DataGridTextColumn Header="Занято?" Binding="{Binding Path=isBusy}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </ScrollViewer>
@@ -316,7 +315,7 @@
                                             </StackPanel>
                                             <StackPanel x:Name="UpdateApartCostPanel" Grid.Column="6">
                                                 <Label Content="Цена"/>
-                                                <TextBox x:Name="UpdateApartCostTextBox"/>
+                                                <TextBox x:Name="UpdateApartCostTextBox" PreviewTextInput="NumberValidationTextBox"/>
                                             </StackPanel>
                                         </Grid>                                                                               
                                         <Button x:Name="UpdateApartCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="UpdateApartCanselBtn_Click"/>
@@ -358,15 +357,15 @@
                                             </StackPanel>
                                             <StackPanel x:Name="CreateApartTypePanel" Grid.Column="2">
                                                 <Label Content="Тип номера"/>
-                                                <ComboBox x:Name="CreateApartTypeTextBox"/>
+                                                <ComboBox x:Name="CreateApartTypeTextBox" IsEditable="True" IsReadOnly="True" Text="Выберите"/>
                                             </StackPanel>
                                             <StackPanel x:Name="CreateApartTimePanel" Grid.Column="4">
                                                 <Label Content="Время уборки"/>
-                                                <ComboBox x:Name="CreateApartTimeTextBox"/>
+                                                <ComboBox x:Name="CreateApartTimeTextBox" IsEditable="True" IsReadOnly="True" Text="Выберите"/>
                                             </StackPanel>
                                             <StackPanel x:Name="CreateApartCostPanel" Grid.Column="6">
                                                 <Label Content="Цена"/>
-                                                <TextBox x:Name="CreateApartCostTextBox"/>
+                                                <TextBox x:Name="CreateApartCostTextBox" PreviewTextInput="NumberValidationTextBox"/>
                                             </StackPanel>
                                         </Grid>
                                         <Button x:Name="CreateApartCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="CreateApartCanselBtn_Click"/>

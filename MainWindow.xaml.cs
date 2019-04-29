@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Configuration;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace hotelAdm
 {
@@ -50,11 +51,17 @@ namespace hotelAdm
 
         private void SetAdminContent()
         {
+            //для номеров
             HotelApartments.TakeApartments();
             HotelApartments.SetApartmentsToGrid(ApartsDataGrid);
+            ApartTypeCollection.TakeApart();
+            CleaningTimeCollection.TakeTime();
             DrawButtons(ApartsBtnGrid, HotelApartments.ApartmentsCount, 4, ShowNumberInfo);
+            //для пользователей
             Users.TakeAllUsers(usersDataGrid);
             CurrrentUser.SetLabels(NameLabel, PositionLabel);
+            UserTypeCollection.TakeUserType();
+            PositionCollection.TakePositions();
         }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {            
@@ -62,7 +69,7 @@ namespace hotelAdm
             {
                 string enteredLogin = LoginTextbox.Text;
                 string enteredPassword = PasswordTextbox.Password.ToString();
-                Load(true);
+                Task task = Task.Factory.StartNew(() => Load(true));
                 if (CurrrentUser.Authorization(enteredLogin, enteredPassword))
                 {
                     SetContent();
@@ -80,7 +87,7 @@ namespace hotelAdm
             }
             finally
             {
-                Load(false);
+                Task task = Task.Factory.StartNew(() => Load(false));
             }
         }
 
@@ -117,7 +124,12 @@ namespace hotelAdm
                 btn.Foreground = TextColor;
             }          
         }
-
+        //Только цифры в textbox
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         private void SaveSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -153,10 +165,16 @@ namespace hotelAdm
         }
         public void Load(bool state)
         {
-            if(state)
-                LoadindGrid.Visibility = Visibility.Visible;
+            if (state)
+            {
+                Action action = () => LoadindGrid.Visibility = Visibility.Visible;
+                LoadindGrid.Dispatcher.Invoke(action);
+            }
             else
-                LoadindGrid.Visibility = Visibility.Hidden;
+            {
+                Action action = () => LoadindGrid.Visibility = Visibility.Hidden;
+                LoadindGrid.Dispatcher.Invoke(action);
+            }                
         }
 
         public void DrawButtons(Grid Target, double count, double columns, RoutedEventHandler hadler)
@@ -208,7 +226,7 @@ namespace hotelAdm
             Button btn = (Button)sender;
             int num = Int32.Parse(btn.Content.ToString());
             Apartment tmp = HotelApartments.Apartsments[num];
-            MessageBox.Show($"{tmp.id}, {tmp.countOfRooms}, {tmp.roomType}, {tmp.cleaningTime}, {tmp.price}, {tmp.isBusy}","Информация о номере");
+            MessageBox.Show($"{tmp.id}, {tmp.countOfRooms}, {tmp.roomType}, {tmp.cleaningTime}, {tmp.price}","Информация о номере");
         }
 
         private void ApartsBtn_Click(object sender, RoutedEventArgs e)
@@ -265,8 +283,12 @@ namespace hotelAdm
                 UpdateUserLoginTextBox.Text = u.login;
                 UpdateUserPasswordTextBox.Text = u.password;
                 UpdateUserFIOTextBox.Text = u.FIO;
-                UpdateUserTypeTextBox.Items.Clear();
-                UpdateUserPositionTextBox.Items.Clear();
+                //Добавление в комбобоксы
+                UserTypeCollection.UserTypeToBox(UpdateUserTypeTextBox);
+                UpdateUserTypeTextBox.SelectedValue = u.type;
+                PositionCollection.PositionsToBox(UpdateUserPositionTextBox);
+                UpdateUserPositionTextBox.SelectedValue = u.position_name;
+                //
                 UsersControlBtnGrid.Visibility = Visibility.Hidden;
                 UpdateUserGrid.Visibility = Visibility.Visible;
             }
@@ -276,7 +298,7 @@ namespace hotelAdm
             }
             usersDataGrid.SelectedItem = null;
         }
-
+        //Удаление пользвателя
         private void DeleteUserBtn_Click(object sender, RoutedEventArgs e)
         {
             User u = (User)usersDataGrid.SelectedItem;
@@ -288,11 +310,11 @@ namespace hotelAdm
                     case MessageBoxResult.Yes:
                         try
                         {
-                            Load(true);
+                            Task task = Task.Factory.StartNew(() => Load(true));
                             usersDataGrid.Items.Clear();
                             Users.DeleteUser(u.id);
                             Users.TakeAllUsers(usersDataGrid);
-                            Load(false);
+                            task = Task.Factory.StartNew(() => Load(false));
                             MessageBox.Show("Пользователь успешно удален");
                         }
                         catch(Exception ex)
@@ -310,7 +332,7 @@ namespace hotelAdm
             }
             usersDataGrid.SelectedItem = null;
         }
-
+        //Удаление номера
         private void DeleteApartBtn_Click(object sender, RoutedEventArgs e)
         {
             Apartment a = (Apartment)ApartsDataGrid.SelectedItem;
@@ -322,13 +344,13 @@ namespace hotelAdm
                     case MessageBoxResult.Yes:
                         try
                         {
-                            Load(true);
+                            Task task = Task.Factory.StartNew(() => Load(true));
                             ApartsDataGrid.Items.Clear();
                             HotelApartments.DeleteApartsment(a.id);
                             HotelApartments.TakeApartments();
                             HotelApartments.SetApartmentsToGrid(ApartsDataGrid);
                             DrawButtons(ApartsBtnGrid, HotelApartments.ApartmentsCount, 4, ShowNumberInfo);
-                            Load(false);
+                            task = Task.Factory.StartNew(() => Load(false));
                             MessageBox.Show("Номер успешно удален");
                         }
                         catch (Exception ex)
@@ -349,6 +371,8 @@ namespace hotelAdm
 
         private void AddUserBtn_Click(object sender, RoutedEventArgs e)
         {
+            UserTypeCollection.UserTypeToBox(CreateUserTypeTextBox);
+            PositionCollection.PositionsToBox(CreateUserPositionTextBox);
             UsersControlBtnGrid.Visibility = Visibility.Hidden;
             CreateUserGrid.Visibility = Visibility.Visible;
         }
@@ -366,7 +390,7 @@ namespace hotelAdm
 
         private void CreateUserSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            MessageBox.Show($"{CreateUserLoginTextBox.Text} :: {CreateUserPasswordTextBox.Text} :: {CreateUserFIOTextBox.Text} :: {CreateUserTypeTextBox.SelectedValue} :: {CreateUserPositionTextBox.SelectedValue}");
         }
         //Кнопки на панели редактирования пользователя
         private void UpdateUserCanselBtn_Click(object sender, RoutedEventArgs e)
@@ -382,7 +406,7 @@ namespace hotelAdm
 
         private void UpdateUserSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show($"{UpdateUserLoginTextBox.Text} :: {UpdateUserPasswordTextBox.Text} :: {UpdateUserFIOTextBox.Text} :: {UpdateUserTypeTextBox.SelectedValue} :: {UpdateUserPositionTextBox.SelectedValue}");
         }
 
         private void UpdateApartBtn_Click(object sender, RoutedEventArgs e)
@@ -393,6 +417,12 @@ namespace hotelAdm
                 UpdateApartLabel.Content += a.id.ToString();
                 UpdateApartRoomsTextBox.Text = a.countOfRooms.ToString();
                 UpdateApartCostTextBox.Text = a.price.ToString();
+                //
+                ApartTypeCollection.ApartToBox(UpdateApartTypeTextBox);
+                UpdateApartTypeTextBox.SelectedValue = a.roomType;
+                CleaningTimeCollection.TimeToBox(UpdateApartTimeTextBox);
+                UpdateApartTimeTextBox.SelectedValue = a.cleaningTime;
+                //
                 ApartControlBtnGrid.Visibility = Visibility.Hidden;
                 UpdateApartGrid.Visibility = Visibility.Visible;
             }
@@ -416,11 +446,13 @@ namespace hotelAdm
 
         private void UpdateApartSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show($"{UpdateApartRoomsTextBox.Text} :: {UpdateApartTypeTextBox.SelectedValue} :: {UpdateApartTimeTextBox.SelectedValue} :: {UpdateApartCostTextBox.Text}");
         }
 
         private void AddApartBtn_Click(object sender, RoutedEventArgs e)
         {
+            ApartTypeCollection.ApartToBox(CreateApartTypeTextBox);
+            CleaningTimeCollection.TimeToBox(CreateApartTimeTextBox);
             ApartControlBtnGrid.Visibility = Visibility.Hidden;
             CreateApartGrid.Visibility = Visibility.Visible;
         }
@@ -437,7 +469,7 @@ namespace hotelAdm
 
         private void CreateApartSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show($"{CreateApartRoomsTextBox.Text} :: {CreateApartTypeTextBox.SelectedValue} :: {CreateApartTimeTextBox.SelectedValue} :: {CreateApartCostTextBox.Text}");
         }
     }
 }

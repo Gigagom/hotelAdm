@@ -31,7 +31,6 @@ namespace hotelAdm
                         tmp.roomType = item["room_type"];
                         tmp.cleaningTime = item["cleaning_time"];
                         tmp.price = Double.Parse(item["price"]);
-                        tmp.isBusy = Byte.Parse(item["is_busy"]);
                         Apartsments.Add(tmp.id,tmp);                        
                     }                        
                 }

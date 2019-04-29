@@ -76,14 +76,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Apartment.cs" />
-    <Compile Include="ConfigChange.cs" />
-    <Compile Include="ConfigChangeException.cs" />
-    <Compile Include="Database.cs" />
-    <Compile Include="DataNavigator.cs" />
-    <Compile Include="ForUser.cs" />
-    <Compile Include="HotelApartments.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="_Stok\Product.cs" />
+    <Compile Include="_Stok\ProductCollection.cs" />
+    <Compile Include="_Stok\Unit.cs" />
+    <Compile Include="_Stok\UnitCollection.cs" />
+    <Compile Include="_Stok\RequestState.cs" />
+    <Compile Include="_Stok\RequestStateCollection.cs" />
+    <Compile Include="_Stok\Request.cs" />
+    <Compile Include="_Stok\RequestCollection.cs" />
+    <Compile Include="_Stok\Provider.cs" />
+    <Compile Include="_Stok\ProviderCollection.cs" />
+    <Compile Include="_Apartsments\CleaningTimeCollection.cs" />
+    <Compile Include="_Apartsments\ApartTypeCollection.cs" />
+    <Compile Include="_Users\PositionCollection.cs" />
+    <Compile Include="_Log\ActionLog.cs" />
+    <Compile Include="_Log\ActionLogCollection.cs" />
+    <Compile Include="_Apartsments\Apartment.cs" />
+    <Compile Include="_Apartsments\ApartType.cs" />
+    <Compile Include="_Apartsments\CleaningTime.cs" />
+    <Compile Include="_Config\ConfigChange.cs" />
+    <Compile Include="_Config\ConfigChangeException.cs" />
+    <Compile Include="_Database\Database.cs" />
+    <Compile Include="_Users\ForUser.cs" />
+    <Compile Include="_Apartsments\HotelApartments.cs" />
+    <Compile Include="_Users\Position.cs" />
+    <Compile Include="_Users\User.cs" />
+    <Compile Include="_Users\UserType.cs" />
+    <Compile Include="_Users\UserTypeCollection.cs" />
     <Page Include="Dictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_Clients\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
