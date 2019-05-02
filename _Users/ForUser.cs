@@ -41,9 +41,40 @@ namespace hotelAdm
 
         private static void SetUsersData(DataGrid DG)
         {
+            DG.Items.Clear();
             foreach (User ur in UsersList)
             {
                 DG.Items.Add(ur);
+            }
+        }
+
+        public static void CreateUser(string _login, string _password, string _fio, string _user_type_text, string _position_text)
+        {
+            try
+            {
+                int _type_id = UserTypeCollection.NameToId(_user_type_text);
+                int _position_id = PositionCollection.NameToId(_position_text);
+                string query = $"call hotel.new_user('{_login}', '{_password}', '{_fio}', '{_type_id}','{_position_id}');";
+                Database.Insert(query);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void UpdateUser(int _id,string _login, string _password, string _fio, string _user_type_text, string _position_text)
+        {
+            try
+            {
+                int _type_id = UserTypeCollection.NameToId(_user_type_text);
+                int _position_id = PositionCollection.NameToId(_position_text);
+                string query = $"call hotel.update_user('{_id}','{_login}', '{_password}', '{_fio}', '{_type_id}','{_position_id}');";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

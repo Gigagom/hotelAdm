@@ -28,13 +28,13 @@
                         <Button x:Name="ApartsBtn" Content="Номера" Style="{StaticResource ForMenuButtons}" Click="ApartsBtn_Click"/>
                         <Button x:Name="OffersBtn" Content="Список заказов" Style="{StaticResource ForMenuButtons}"/>
                         <Button x:Name="StokBtn" Content="Склад" Style="{StaticResource ForMenuButtons}"/>
-                        <Button x:Name="GuestsBtn" Content="Клиенты" Style="{StaticResource ForMenuButtons}"/>
+                        <Button x:Name="GuestsBtn" Content="Клиенты" Style="{StaticResource ForMenuButtons}" Click="GuestsBtn_Click"/>
                         <Button x:Name="SBSettingsBtn" Content="Настройки"  Style="{StaticResource ForMenuButtons}" Click="SBSettingsBtn_Click" Margin="7,15,3.4,15"/>
                     </StackPanel>
                 </Grid>
             </Grid>
             <Grid x:Name="DataGrid" Grid.Column="1">
-                <Grid x:Name="SettingsGrid" Visibility="Visible">
+                <Grid x:Name="SettingsGrid" Visibility="Hidden" Background="White">
                     <TabControl x:Name="DBSettingsTab">
                         <TabItem x:Name="ConnectionSettings">
                             <TabItem.Header>
@@ -52,7 +52,7 @@
                                         <RowDefinition Height="3*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Column="1" Content="Настройка подключения БД" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
+                                    <Label Grid.Column="1" Content="Настройка подключения БД" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="34"/>
                                     <Grid Grid.Column="1" Grid.Row="1">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="2*"/>
@@ -78,8 +78,9 @@
                                         </StackPanel>
                                         <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                             <Button x:Name="SaveSettingsBtn" Content="Сохранить" Style="{StaticResource ForMenuButtons}" Click="SaveSettingsBtn_Click"/>
-                                        </Grid>
+                                        </Grid>                                        
                                     </Grid>
+                                    <Button x:Name="SaveDBBtn" Content="Резервная копия" Grid.Column="2" Grid.Row="2" Style="{StaticResource ForMenuButtons}" Click="SaveDBBtn_Click"/>
                                 </Grid>
                             </TabItem.Content>
                         </TabItem>
@@ -195,6 +196,7 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="6*"/>
                                         </Grid.ColumnDefinitions>
+                                        <TextBox x:Name="UserIdForUpdate" Visibility="Collapsed"/>
                                         <Label Content="Редактирование пользователя" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
                                         <StackPanel x:Name="UpdateUserLoginPanel" Grid.Row="1">
                                             <Label Content="Логин"/>
@@ -301,9 +303,10 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="4*"/>
                                             </Grid.ColumnDefinitions>
+                                            <TextBox x:Name="UpdateApartId" Visibility="Collapsed"/>
                                             <StackPanel x:Name="UpdateApartRoomsPanel">
                                                 <Label Content="Количество комнат"/>
-                                                <TextBox x:Name="UpdateApartRoomsTextBox"/>
+                                                <TextBox x:Name="UpdateApartRoomsTextBox" PreviewTextInput="NumberValidationTextBox"/>
                                             </StackPanel>
                                             <StackPanel x:Name="UpdateApartTypePanel" Grid.Column="2">
                                                 <Label Content="Тип номера"/>
@@ -353,7 +356,7 @@
                                             </Grid.ColumnDefinitions>
                                             <StackPanel x:Name="CreateApartRoomsPanel">
                                                 <Label Content="Количество комнат"/>
-                                                <TextBox x:Name="CreateApartRoomsTextBox"/>
+                                                <TextBox x:Name="CreateApartRoomsTextBox" PreviewTextInput="NumberValidationTextBox"/>
                                             </StackPanel>
                                             <StackPanel x:Name="CreateApartTypePanel" Grid.Column="2">
                                                 <Label Content="Тип номера"/>
@@ -374,13 +377,35 @@
                                 </Grid>
                             </TabItem.Content>
                         </TabItem>
-                        <TabItem x:Name="Magazine">
+                        <TabItem x:Name="Magazine" MouseUp="Magazine_MouseUp">
                             <TabItem.Header>
                                 <TextBlock Text="Журнал"/>
                             </TabItem.Header>
                             <TabItem.Content>
                                 <Grid>
-
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="6*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="1" Content="Журнал" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                                    <Grid Grid.Column="1" Grid.Row="1">
+                                        <ScrollViewer>
+                                            <DataGrid  x:Name="LogDG" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
+            RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14" >
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="№" Binding="{Binding Path=Id}"/>
+                                                    <DataGridTextColumn Header="Время" Binding="{Binding Path=Time}"/>
+                                                    <DataGridTextColumn Header="Сообщение" Binding="{Binding Path=Text}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </ScrollViewer>
+                                    </Grid>
                                 </Grid>
                             </TabItem.Content>
                         </TabItem>
@@ -402,17 +427,50 @@
 
                     </Grid>
                 </Grid>
-                <Grid x:Name="NewOfferGrid" Visibility="Hidden">
+                <Grid x:Name="NewOfferGrid" Visibility="Hidden" Background="White">
 
                 </Grid>
-                <Grid x:Name="OfferListGrid" Visibility="Hidden">
+                <Grid x:Name="OfferListGrid" Visibility="Hidden" Background="White">
 
                 </Grid>
-                <Grid x:Name="StokGrid" Visibility="Hidden">
+                <Grid x:Name="StokGrid" Visibility="Hidden" Background="White">
 
                 </Grid>
-                <Grid x:Name="GuestsGrid" Visibility="Hidden">
-
+                <Grid x:Name="GuestsGrid" Visibility="Hidden" Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Клиенты" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="7*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <Label Content="Поиск"/>
+                            <TextBox x:Name="ClientSearchTextBox" KeyUp="ClientSearchTextBox_KeyUp"/>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <ScrollViewer>
+                                <DataGrid  x:Name="ClientsDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
+            RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                                            <DataGridTextColumn Header="ФИО" Binding="{Binding Path=Name}"/>
+                                            <DataGridTextColumn Header="№ паспорта" Binding="{Binding Path=Passport_number}"/>
+                                        <DataGridTextColumn Header="Телефон" Binding="{Binding Path=Phone}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

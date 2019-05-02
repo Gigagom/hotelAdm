@@ -31,6 +31,7 @@ namespace hotelAdm
 
         private static void SetActionLogData(DataGrid DG)
         {
+            DG.Items.Clear();
             foreach (ActionLog ur in ActionLogList)
             {
                 DG.Items.Add(ur);

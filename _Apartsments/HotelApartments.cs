@@ -47,12 +47,42 @@ namespace hotelAdm
 
         public static void SetApartmentsToGrid(DataGrid dg)
         {
-            foreach(KeyValuePair<int, Apartment> a in Apartsments)
+            dg.Items.Clear();
+            foreach (KeyValuePair<int, Apartment> a in Apartsments)
             {
                 dg.Items.Add(a.Value);
             }
         }
 
+        public static void CreateApartsment(int _rooms, string _type, string _time, double _cost)
+        {
+            try
+            {
+                int _type_id = ApartTypeCollection.NameToId(_type);
+                int _time_id = CleaningTimeCollection.NameToId(_time);
+                string query = $"INSERT INTO `hotel`.`hotel_apart` (`count_of_rooms`, `id_room_type`, `cleaning_time_id`, `price`) VALUES ('{_rooms}', '{_type_id}', '{_time_id}', '{_cost}');";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void UpdateApartsment(int _id,int _rooms, string _type, string _time, double _cost)
+        {
+            try
+            {
+                int _type_id = ApartTypeCollection.NameToId(_type);
+                int _time_id = CleaningTimeCollection.NameToId(_time);
+                string query = $"UPDATE `hotel`.`hotel_apart` SET `count_of_rooms` = '{_rooms}', `id_room_type` = '{_type_id}', `cleaning_time_id` = '{_time_id}', `price` = '{_cost}' WHERE (`id` = '{_id}')";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static void DeleteApartsment(int id)
         {
             string query = $"DELETE FROM `hotel`.`hotel_apart` WHERE (`id` = '{id.ToString()}');";

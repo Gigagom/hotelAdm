@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace hotelAdm
 {
@@ -115,6 +116,10 @@ namespace hotelAdm
                     cmd.ExecuteNonQuery();                    
                 }
             }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
             finally
             {
                 Database.CloseConnection();
@@ -204,6 +209,51 @@ namespace hotelAdm
                 else
                 {
                     return list;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        static public void BackUp()
+        {
+            try
+            {
+                string connect = "datasource=" + server +
+                               ";port=" + port +
+                               ";username=" + user +
+                               ";password=" + password +
+                               ";database=" + databaseName;
+                string day = DateTime.Today.ToString("dd-MM-yyyy");
+                string time = DateTime.Now.ToString("HH-mm-ss");
+                string dir = AppDomain.CurrentDomain.BaseDirectory;
+                string file = $@"{dir}{day} {time} backup.sql";
+                using (System.IO.FileStream fs = System.IO.File.Create(file)){}
+                using (MySqlConnection conn = new MySqlConnection(connect))
+                {
+                    try
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand())
+                        {
+                            using (MySqlBackup mb = new MySqlBackup(cmd))
+                            {
+                                cmd.Connection = conn;
+                                conn.Open();
+                                mb.ExportToFile(file);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                    
                 }
             }
             catch(Exception ex)

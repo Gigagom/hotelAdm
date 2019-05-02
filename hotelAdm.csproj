@@ -43,6 +43,10 @@
       <HintPath>..\packages\MySql.Data.8.0.15\lib\net452\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MySqlBackup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySqlBackup.1.0.1\lib\MySqlBackup.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -76,6 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="_Clients\Client.cs" />
+    <Compile Include="_Clients\ClientCollection.cs" />
     <Compile Include="_Stok\Product.cs" />
     <Compile Include="_Stok\ProductCollection.cs" />
     <Compile Include="_Stok\Unit.cs" />
@@ -153,9 +159,7 @@
   <ItemGroup>
     <Resource Include="img\loading.gif" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_Clients\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
