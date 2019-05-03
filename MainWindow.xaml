@@ -26,7 +26,7 @@
                     <StackPanel x:Name="MenuButtons">
                         <Button x:Name="NewOfferBtn" Content="Новый заказ" Style="{StaticResource ForMenuButtons}"/>
                         <Button x:Name="ApartsBtn" Content="Номера" Style="{StaticResource ForMenuButtons}" Click="ApartsBtn_Click"/>
-                        <Button x:Name="OffersBtn" Content="Список заказов" Style="{StaticResource ForMenuButtons}"/>
+                        <Button x:Name="OffersBtn" Content="Список заказов" Style="{StaticResource ForMenuButtons}" Click="OffersBtn_Click"/>
                         <Button x:Name="StokBtn" Content="Склад" Style="{StaticResource ForMenuButtons}"/>
                         <Button x:Name="GuestsBtn" Content="Клиенты" Style="{StaticResource ForMenuButtons}" Click="GuestsBtn_Click"/>
                         <Button x:Name="SBSettingsBtn" Content="Настройки"  Style="{StaticResource ForMenuButtons}" Click="SBSettingsBtn_Click" Margin="7,15,3.4,15"/>
@@ -430,8 +430,35 @@
                 <Grid x:Name="NewOfferGrid" Visibility="Hidden" Background="White">
 
                 </Grid>
-                <Grid x:Name="OfferListGrid" Visibility="Hidden" Background="White">
-
+                <Grid x:Name="OfferListGrid" Visibility="Visible" Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="7*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Список заказов" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"/>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid>
+                            <ScrollViewer>
+                                <DataGrid  x:Name="OrderListDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
+            RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                                        <DataGridTextColumn Header="К-во дней" Binding="{Binding Path=DaysCount}"/>
+                                        <DataGridTextColumn Header="ID Клиента" Binding="{Binding Path=GuestID}"/>
+                                        <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}"/>
+                                        <DataGridTextColumn Header="Дата начала" Binding="{Binding Path=StartDay}"/>
+                                        <DataGridTextColumn Header="Дата" Binding="{Binding Path=Date}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <Grid x:Name="StokGrid" Visibility="Hidden" Background="White">
 

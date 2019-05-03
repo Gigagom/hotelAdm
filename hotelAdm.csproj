@@ -80,6 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="_Orders\Order.cs" />
+    <Compile Include="_Orders\OrderCollection.cs" />
     <Compile Include="_Clients\Client.cs" />
     <Compile Include="_Clients\ClientCollection.cs" />
     <Compile Include="_Stok\Product.cs" />

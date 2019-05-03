@@ -65,6 +65,9 @@ namespace hotelAdm
             //для клиентов
             ClientCollection.TakeClients();
             ClientCollection.ClientsToDG(ClientsDataGrid);
+            //для заказов
+            OrderCollection.TakeOrders();
+            OrderCollection.OrdersToDG(OrderListDataGrid);
         }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {            
@@ -610,5 +613,21 @@ namespace hotelAdm
                 ClientsDataGrid.Items.Add(a);
         }
 
+        private void OffersBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (OfferListGrid.Visibility != Visibility.Visible)
+            {
+                SetAllMenuButtonsToDefault();
+                HideAllGrids();
+                ReverseBtnColor(btn);
+                OfferListGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ReverseBtnColor(btn);
+                HideGrid(OfferListGrid);
+            }
+        }
     }
 }
