@@ -524,5 +524,46 @@
                 <Image Grid.Row="1" gif:ImageBehavior.AnimatedSource="img/loading.gif"/>
             </Grid>
         </Grid>
+        <Grid x:Name="ApartInfoGrid" Background="#BFFFFFFF" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Black" BorderThickness="2"  Grid.Row="1" Grid.Column="1" CornerRadius="5">
+                <Grid Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="ApartInfoLabel" Content="Информация о номере №" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32"/>
+                    <StackPanel Grid.Row="1" Grid.Column="1">
+                        <TextBox Text="Количество комнат" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                        <TextBox Text="Тип номера" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                        <TextBox Text="Время уборки" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                        <TextBox Text="Цена" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="2">
+                        <TextBox x:Name="ApartInfoRoomsTextBox" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                        <TextBox x:Name="ApartInfoTypeTextBox" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                        <TextBox x:Name="ApartInfoTimeTextBox" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                        <TextBox x:Name="ApartInfoCostTextBox" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                    </StackPanel>
+                    <Button x:Name="ApartInfoCloseBtn" Content="Закрыть" Grid.Row="2" Grid.Column="3" Margin="5,20,5,20" Style="{StaticResource ForDeleteBtn}" Click="ApartInfoCloseBtn_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

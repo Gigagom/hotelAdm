@@ -214,8 +214,7 @@ namespace hotelAdm
                     newBtn.Content = number.ToString();
                     newBtn.Name = "Button" + i.ToString() + j.ToString();
                     newBtn.Height = 100;
-                    newBtn.FontSize = 50;
-                    newBtn.Margin = new Thickness(20, 30, 20, 0);
+                    newBtn.Style = (Style)FindResource("ForApartButtons");
                     newBtn.Click += new RoutedEventHandler(hadler);
 
                     panels[j].Children.Add(newBtn);
@@ -232,7 +231,22 @@ namespace hotelAdm
             Button btn = (Button)sender;
             int num = Int32.Parse(btn.Content.ToString());
             Apartment tmp = HotelApartments.Apartsments[num];
-            MessageBox.Show($"{tmp.id}, {tmp.countOfRooms}, {tmp.roomType}, {tmp.cleaningTime}, {tmp.price}","Информация о номере");
+            ApartInfoLabel.Content += tmp.id.ToString();
+            ApartInfoRoomsTextBox.Text = tmp.countOfRooms.ToString();
+            ApartInfoTypeTextBox.Text = tmp.roomType;
+            ApartInfoTimeTextBox.Text = tmp.cleaningTime;
+            ApartInfoCostTextBox.Text = tmp.price.ToString();
+            ApartInfoGrid.Visibility = Visibility.Visible;
+        }
+
+        private void ApartInfoCloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ApartInfoGrid.Visibility = Visibility.Hidden;
+            ApartInfoLabel.Content = "Информация о номере №";
+            ApartInfoRoomsTextBox.Clear();
+            ApartInfoTypeTextBox.Clear();
+            ApartInfoTimeTextBox.Clear();
+            ApartInfoCostTextBox.Clear();
         }
 
         private void ApartsBtn_Click(object sender, RoutedEventArgs e)
@@ -537,6 +551,7 @@ namespace hotelAdm
                 HotelApartments.CreateApartsment(Convert.ToInt32(CreateApartRoomsTextBox.Text), CreateApartTypeTextBox.SelectedValue.ToString(), CreateApartTimeTextBox.SelectedValue.ToString(), Convert.ToDouble(CreateApartCostTextBox.Text));
                 HotelApartments.TakeApartments();
                 HotelApartments.SetApartmentsToGrid(ApartsDataGrid);
+                DrawButtons(ApartsBtnGrid, HotelApartments.ApartmentsCount, 4, ShowNumberInfo);
                 //
                 CreateApartRoomsTextBox.Clear();
                 CreateApartTypeTextBox.Items.Clear();
@@ -594,5 +609,6 @@ namespace hotelAdm
             foreach (Client a in filter)
                 ClientsDataGrid.Items.Add(a);
         }
+
     }
 }
