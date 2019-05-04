@@ -629,5 +629,45 @@ namespace hotelAdm
                 HideGrid(OfferListGrid);
             }
         }
+
+        private void OrderListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Order a = (Order)OrderListDataGrid.SelectedItem;
+            if (a != null)
+            {
+                try
+                {
+                    OrderInfoPasswordNumber.Text = ClientCollection.TakePassById(a.GuestID);
+                    OrderInfoApartListNumber.Text = HotelApartments.GetApartsByOrder(a.Id);
+                    OrderInfoLabel.Content += a.Id.ToString();
+                    OrderInfoDays.Text = a.DaysCount;
+                    OrderInfoPrice.Text = a.Price.ToString();
+                    OrderInfoStartDay.Text = a.StartDay;
+                    OrderInfoRegisterDateTime.Text = a.Date;
+                    OfferInfoGrid.Visibility = Visibility.Visible;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите заказ!");
+            }
+            OrderListDataGrid.SelectedItem = null;
+        }
+
+        private void OrderInfoCloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OrderInfoLabel.Content = "Информация о Заказе №";
+            OrderInfoPasswordNumber.Clear();
+            OrderInfoApartListNumber.Clear();
+            OrderInfoDays.Clear();
+            OrderInfoPrice.Clear();
+            OrderInfoStartDay.Clear();
+            OrderInfoRegisterDateTime.Clear();
+            OfferInfoGrid.Visibility = Visibility.Hidden;
+        }
     }
 }

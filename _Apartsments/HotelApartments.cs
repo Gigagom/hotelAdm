@@ -95,5 +95,28 @@ namespace hotelAdm
                 throw new Exception(ex.Message);
             }
         }
+
+        public static string GetApartsByOrder(int _id)
+        {
+            try
+            {
+                string result = null;
+                string query = $"SELECT apart_id FROM hotel.orders_to_apart_connect where order_id = {_id} order by apart_id;";
+                List<Dictionary<string, string>> UR = Database.Select(query, new string[] { "apart_id" });
+                if (UR.Count != 0)
+                {
+                    foreach (var item in UR)
+                    {
+                        result += $"{item["apart_id"]}, ";
+                    }
+                }
+                result = result.TrimEnd(new char[] { ',', ' '});
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + ex.Source + ex.TargetSite);
+            }
+        }
     }
 }

@@ -430,7 +430,7 @@
                 <Grid x:Name="NewOfferGrid" Visibility="Hidden" Background="White">
 
                 </Grid>
-                <Grid x:Name="OfferListGrid" Visibility="Visible" Background="White">
+                <Grid x:Name="OfferListGrid" Visibility="Hidden" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="7*"/>
@@ -445,8 +445,8 @@
                     <Grid Grid.Row="1" Grid.Column="1">
                         <Grid>
                             <ScrollViewer>
-                                <DataGrid  x:Name="OrderListDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
-            RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
+                                <DataGrid  x:Name="OrderListDataGrid" ToolTip="Для просмотра дополнительной информации сделайте двойной щелчек по заказу" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
+            RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14" MouseDoubleClick="OrderListDataGrid_MouseDoubleClick">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
                                         <DataGridTextColumn Header="К-во дней" Binding="{Binding Path=DaysCount}"/>
@@ -589,6 +589,51 @@
                         <TextBox x:Name="ApartInfoCostTextBox" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
                     </StackPanel>
                     <Button x:Name="ApartInfoCloseBtn" Content="Закрыть" Grid.Row="2" Grid.Column="3" Margin="5,20,5,20" Style="{StaticResource ForDeleteBtn}" Click="ApartInfoCloseBtn_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid x:Name="OfferInfoGrid" Background="#BFFFFFFF" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Black" BorderThickness="2"  Grid.Row="1" Grid.Column="1" CornerRadius="5">
+                <Grid Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="OrderInfoLabel" Content="Информация о Заказе №" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32"/>
+                    <StackPanel Grid.Row="1" Grid.Column="1">
+                        <TextBox Text="Количество дней" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                        <TextBox Text="Номер паспорта клиента" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                        <TextBox Text="Номера в заказе" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                        <TextBox Text="Сумма заказа" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                        <TextBox Text="Дата начала заказа" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                        <TextBox Text="Дата регистрации заказа" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="2">
+                        <TextBox x:Name="OrderInfoDays" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                        <TextBox x:Name="OrderInfoPasswordNumber" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                        <TextBox x:Name="OrderInfoApartListNumber" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                        <TextBox x:Name="OrderInfoPrice" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                        <TextBox x:Name="OrderInfoStartDay" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                        <TextBox x:Name="OrderInfoRegisterDateTime" IsReadOnly="True" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                    </StackPanel>
+                    <Button x:Name="OrderInfoCloseBtn" Content="Закрыть" Grid.Row="2" Grid.Column="3" Margin="5,20,5,20" Style="{StaticResource ForDeleteBtn}" Click="OrderInfoCloseBtn_Click"/>
                 </Grid>
             </Border>
         </Grid>

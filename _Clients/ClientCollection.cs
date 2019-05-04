@@ -35,6 +35,26 @@ namespace hotelAdm
             }
             
         }
+        public static string TakePassById(int _id)
+        {
+            try
+            {
+                string query = $"SELECT passport_num FROM hotel.guests where id = {_id};";
+                List<Dictionary<string, string>> UR = Database.Select(query, new string[] { "passport_num" });
+                if (UR.Count != 0)
+                {
+                    foreach (var item in UR)
+                    {
+                        return item["passport_num"];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + ex.Source + ex.TargetSite);
+            }
+            return null;
+        }
         public static void ClientsToDG(DataGrid DG)
         {
             DG.Items.Clear();
