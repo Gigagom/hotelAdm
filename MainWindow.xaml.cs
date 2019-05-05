@@ -105,6 +105,7 @@ namespace hotelAdm
                 SetAllMenuButtonsToDefault();
                 HideAllGrids();
                 ReverseBtnColor(btn);
+                DBSettingsTab.SelectedIndex = 0;
                 SettingsGrid.Visibility = Visibility.Visible;
             }
             else
@@ -668,6 +669,24 @@ namespace hotelAdm
             OrderInfoStartDay.Clear();
             OrderInfoRegisterDateTime.Clear();
             OfferInfoGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void StokBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (StokGrid.Visibility != Visibility.Visible)
+            {
+                SetAllMenuButtonsToDefault();
+                HideAllGrids();
+                ReverseBtnColor(btn);
+                StokTabs.SelectedIndex = 0;
+                StokGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ReverseBtnColor(btn);
+                HideGrid(StokGrid);
+            }
         }
     }
 }

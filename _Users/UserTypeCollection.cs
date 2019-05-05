@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace hotelAdm
@@ -28,7 +27,7 @@ namespace hotelAdm
             }
         }
 
-        public static void UserTypeToBox(ComboBox CB)
+        public static void UserTypeToBox(System.Windows.Controls.ComboBox CB)
         {
             CB.Items.Clear();
             foreach(UserType ut in UserTypeList)

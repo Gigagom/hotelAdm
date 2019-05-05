@@ -8,5 +8,14 @@ namespace hotelAdm
 {
     class RequestState
     {
+        public static string[] RequestStateKeys = new string[] { "id", "statement" };
+        public int Id { get; set; }
+        public string State { get; set; }
+
+        public RequestState(int _id, string _state)
+        {
+            Id = _id;
+            State = _state;
+        }
     }
 }

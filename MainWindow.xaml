@@ -27,7 +27,7 @@
                         <Button x:Name="NewOfferBtn" Content="Новый заказ" Style="{StaticResource ForMenuButtons}"/>
                         <Button x:Name="ApartsBtn" Content="Номера" Style="{StaticResource ForMenuButtons}" Click="ApartsBtn_Click"/>
                         <Button x:Name="OffersBtn" Content="Список заказов" Style="{StaticResource ForMenuButtons}" Click="OffersBtn_Click"/>
-                        <Button x:Name="StokBtn" Content="Склад" Style="{StaticResource ForMenuButtons}"/>
+                        <Button x:Name="StokBtn" Content="Склад" Style="{StaticResource ForMenuButtons}" Click="StokBtn_Click"/>
                         <Button x:Name="GuestsBtn" Content="Клиенты" Style="{StaticResource ForMenuButtons}" Click="GuestsBtn_Click"/>
                         <Button x:Name="SBSettingsBtn" Content="Настройки"  Style="{StaticResource ForMenuButtons}" Click="SBSettingsBtn_Click" Margin="7,15,3.4,15"/>
                     </StackPanel>
@@ -461,7 +461,38 @@
                     </Grid>
                 </Grid>
                 <Grid x:Name="StokGrid" Visibility="Hidden" Background="White">
+                    <TabControl x:Name="StokTabs">
+                        <TabItem x:Name="ProductsTab">
+                            <TabItem.Header>
+                                <TextBlock Text="Склад"/>
+                            </TabItem.Header>
+                            <TabItem.Content>
+                                <Grid>
+                                    
+                                </Grid>
+                            </TabItem.Content>
+                        </TabItem>
+                        <TabItem x:Name="ProvidersTab">
+                            <TabItem.Header>
+                                <TextBlock Text="Поставщики"/>
+                            </TabItem.Header>
+                            <TabItem.Content>
+                                <Grid>
 
+                                </Grid>
+                            </TabItem.Content>
+                        </TabItem>
+                        <TabItem x:Name="RequestsTab">
+                            <TabItem.Header>
+                                <TextBlock Text="Запросы к поставщикам"/>
+                            </TabItem.Header>
+                            <TabItem.Content>
+                                <Grid>
+
+                                </Grid>
+                            </TabItem.Content>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
                 <Grid x:Name="GuestsGrid" Visibility="Hidden" Background="White">
                     <Grid.RowDefinitions>
