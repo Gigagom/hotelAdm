@@ -460,7 +460,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="StokGrid" Visibility="Hidden" Background="White">
+                <Grid x:Name="StokGrid" Visibility="Visible" Background="White">
                     <TabControl x:Name="StokTabs">
                         <TabItem x:Name="ProductsTab">
                             <TabItem.Header>
@@ -468,7 +468,120 @@
                             </TabItem.Header>
                             <TabItem.Content>
                                 <Grid>
-                                    
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="6*"/>
+                                        <RowDefinition Height="3*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="1" Content="Список продуктов" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                                    <Grid Grid.Column="1" Grid.Row="1">
+                                        <ScrollViewer>
+                                            <DataGrid  x:Name="ProductsDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                                                    <DataGridTextColumn Header="Наименование" Binding="{Binding Path=Name}"/>
+                                                    <DataGridTextColumn Header="Количество" Binding="{Binding Path=Count}"/>
+                                                    <DataGridTextColumn Header="Единицы измерения" Binding="{Binding Path=Unit}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </ScrollViewer>
+                                    </Grid>
+                                    <Grid x:Name="ProductsControlBtnGrid" Grid.Column="1" Grid.Row="2" Background="White" Visibility="Visible">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button x:Name="AddProductBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}" Click="AddProductBtn_Click"/>
+                                        <Button x:Name="UpdateProductBtn" Content="Изменить" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Click="UpdateProductBtn_Click"/>
+                                        <Button x:Name="DeleteProductBtn" Content="Удалить" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}" Click="DeleteProductBtn_Click"/>
+                                    </Grid>
+                                    <Grid x:Name="CreateProductGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="Добавление продукта" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <StackPanel x:Name="CreateProductNamePanel" Grid.Row="1" Grid.Column="2">
+                                            <Label Content="Наименование"/>
+                                            <TextBox x:Name="CreateProductNameTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateProductCountPanel" Grid.Row="1" Grid.Column="4">
+                                            <Label Content="Количество"/>
+                                            <TextBox x:Name="CreateProductCountTextBox" PreviewTextInput="NumberValidationTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateProductUnitsPanel" Grid.Row="1" Grid.Column="6">
+                                            <Label Content="Единицы измерения"/>
+                                            <ComboBox x:Name="CreateProductUnitsComboBox"/>
+                                        </StackPanel>
+                                        <Button x:Name="CreateProductCanselBtn" Content="Отменить" Grid.Column="4" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="CreateProductCanselBtn_Click"/>
+                                        <Button x:Name="CreateProductSaveBtn" Content="Сохранить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="CreateProductSaveBtn_Click"/>
+                                    </Grid>
+                                    <Grid x:Name="UpdateProductGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox x:Name="ProductIdForUpdate" Visibility="Collapsed"/>
+                                        <Label Content="Редактирование продукта" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <StackPanel x:Name="UpdateProductNamePanel" Grid.Row="1" Grid.Column="2">
+                                            <Label Content="Наименование"/>
+                                            <TextBox x:Name="UpdateProductNameTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="UpdateProductCountPanel" Grid.Row="1" Grid.Column="4">
+                                            <Label Content="Количество"/>
+                                            <TextBox x:Name="UpdateProductCountTextBox" PreviewTextInput="NumberValidationTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="UpdateProductUnitsPanel" Grid.Row="1" Grid.Column="6">
+                                            <Label Content="Единицы измерения"/>
+                                            <ComboBox x:Name="UpdateProductUnitsComboBox"/>
+                                        </StackPanel>
+                                        <Button x:Name="UpdateProductCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="UpdateProductCanselBtn_Click"/>
+                                        <Button x:Name="UpdateProductSaveBtn" Content="Сохранить" Grid.Column="8" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="UpdateProductSaveBtn_Click"/>
+                                    </Grid>
                                 </Grid>
                             </TabItem.Content>
                         </TabItem>
@@ -478,7 +591,111 @@
                             </TabItem.Header>
                             <TabItem.Content>
                                 <Grid>
-
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="6*"/>
+                                        <RowDefinition Height="3*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="1" Content="Список поставщиков" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                                    <Grid Grid.Column="1" Grid.Row="1">
+                                        <ScrollViewer>
+                                            <DataGrid  x:Name="ProviderDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                                                    <DataGridTextColumn Header="Наименование" Binding="{Binding Path=Name}"/>
+                                                    <DataGridTextColumn Header="Телефон" Binding="{Binding Path=Phone}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </ScrollViewer>
+                                    </Grid>
+                                    <Grid x:Name="ProviderControlBtnGrid" Grid.Column="1" Grid.Row="2" Background="White" Visibility="Visible">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button x:Name="AddProviderBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}" Click="AddProviderBtn_Click"/>
+                                        <Button x:Name="UpdateProviderBtn" Content="Изменить" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Click="UpdateProviderBtn_Click"/>
+                                        <Button x:Name="DeleteProviderBtn" Content="Удалить" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}" Click="DeleteProviderBtn_Click"/>
+                                    </Grid>
+                                    <Grid x:Name="CreateProviderGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="Добавление пользователя" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <StackPanel x:Name="CreateProviderNamePanel" Grid.Row="1" Grid.Column="2">
+                                            <Label Content="Наименование"/>
+                                            <TextBox x:Name="CreateProviderNameTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateProviderCountPanel" Grid.Row="1" Grid.Column="4">
+                                            <Label Content="Телефон"/>
+                                            <TextBox x:Name="CreateProviderTelTextBox"/>
+                                        </StackPanel>
+                                        <Button x:Name="CreateProviderCanselBtn" Content="Отменить" Grid.Column="4" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="CreateProviderCanselBtn_Click"/>
+                                        <Button x:Name="CreateProviderSaveBtn" Content="Сохранить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="CreateProviderSaveBtn_Click"/>
+                                    </Grid>
+                                    <Grid x:Name="UpdateProviderGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox x:Name="ProviderIdForUpdate" Visibility="Collapsed"/>
+                                        <Label Content="Редактирование поставщика" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <StackPanel x:Name="UpdateProviderNamePanel" Grid.Row="1" Grid.Column="2">
+                                            <Label Content="Наименование"/>
+                                            <TextBox x:Name="UpdateProviderNameTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="UpdateProviderCountPanel" Grid.Row="1" Grid.Column="4">
+                                            <Label Content="Телефон"/>
+                                            <TextBox x:Name="UpdateProviderTelTextBox"/>
+                                        </StackPanel>
+                                        <Button x:Name="UpdateProviderCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="UpdateProviderCanselBtn_Click"/>
+                                        <Button x:Name="UpdateProviderSaveBtn" Content="Сохранить" Grid.Column="8" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="UpdateProviderSaveBtn_Click"/>
+                                    </Grid>
                                 </Grid>
                             </TabItem.Content>
                         </TabItem>

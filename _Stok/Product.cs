@@ -8,17 +8,17 @@ namespace hotelAdm
 {
     class Product
     {
-        public static string[] ProductKeys = new string[] { "id", "product_name", "product_count", "unit_id" };
+        public static string[] ProductKeys = new string[] { "id_prod", "product_name", "product_count", "Unit_name" };
         public int Id { get; set; }
         public string Name { get; set; }
         public int Count { get; set; }
-        public int UnitId { get; set; }
-        public Product(int _id, string _name, int _count, int _unitId)
+        public string Unit { get; set; }
+        public Product(int _id, string _name, int _count, string _unit)
         {
             Id = _id;
             Name = _name;
             Count = _count;
-            UnitId = _unitId;
+            Unit = _unit;
         }
     }
 }

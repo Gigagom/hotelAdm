@@ -15,16 +15,16 @@ namespace hotelAdm
             try
             {
                 ProductsList.Clear();
-                string query = "SELECT * FROM hotel.stok;";
+                string query = "call hotel.GetProducts();";
                 List<Dictionary<string, string>> UR = Database.Select(query, Product.ProductKeys);
                 if (UR.Count != 0)
                 {
                     foreach (var item in UR)
                     {
-                        Product ur = new Product(Int32.Parse(item["id"]),
+                        Product ur = new Product(Int32.Parse(item["id_prod"]),
                                                 item["product_name"],
                                                 Int32.Parse(item["product_count"]),
-                                                Int32.Parse(item["unit_id"]));
+                                                item["Unit_name"]);
                         ProductsList.Add(ur);
                     }
                 }
@@ -42,6 +42,42 @@ namespace hotelAdm
             foreach (Product p in ProductsList)
             {
                 DG.Items.Add(p);
+            }
+        }
+        public static void CreateProduct(string _name, int _count, int _units)
+        {
+            try
+            {
+                string query = $"INSERT INTO `hotel`.`stok` (`product_name`, `product_count`, `unit_id`) VALUES ('{_name}', '{_count}', '{_units}');";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static void UpdateProduct(int _id,string _name, int _count, int _units)
+        {
+            try
+            {
+                string query = $"UPDATE `hotel`.`stok` SET `product_name` = '{_name}', `product_count` = '{_count}', `unit_id` = '{_units}' WHERE (`id_prod` = '{_id}');";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static void DeleteProduct(int _id)
+        {
+            try
+            {                
+                string query = $"DELETE FROM `hotel`.`stok` WHERE(`id_prod` = '{_id}');";
+                Database.Delete(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

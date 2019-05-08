@@ -10,7 +10,7 @@ namespace hotelAdm
     {
         static public List<Unit> UnitList = new List<Unit>();
 
-        public static void TakeUserType()
+        public static void TakeUnits()
         {
             UnitList.Clear();
             string query = "SELECT * FROM hotel.units;";
@@ -26,7 +26,7 @@ namespace hotelAdm
             }
         }
 
-        public static void UserTypeToBox(System.Windows.Controls.ComboBox CB)
+        public static void UnitsToBox(System.Windows.Controls.ComboBox CB)
         {
             CB.Items.Clear();
             foreach (Unit ut in UnitList)

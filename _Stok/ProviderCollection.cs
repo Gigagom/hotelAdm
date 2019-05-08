@@ -41,5 +41,42 @@ namespace hotelAdm
                 DG.Items.Add(p);
             }
         }
+
+        public static void CreateProvider(string _name, string _tel)
+        {
+            try
+            {
+                string query = $"INSERT INTO `hotel`.`providers` (`provider_name`, `provider_tel`) VALUES ('{_name}', '{_tel}');";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static void UpdateProvider(int _id, string _name, string _tel)
+        {
+            try
+            {
+                string query = $"UPDATE `hotel`.`providers` SET `provider_name` = '{_name}', `provider_tel` = '{_tel}' WHERE (`id` = '{_id}');";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static void DeleteProvider(int _id)
+        {
+            try
+            {
+                string query = $"DELETE FROM `hotel`.`providers` WHERE (`id` = '{_id}');";
+                Database.Delete(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

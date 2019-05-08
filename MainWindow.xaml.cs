@@ -68,6 +68,12 @@ namespace hotelAdm
             //для заказов
             OrderCollection.TakeOrders();
             OrderCollection.OrdersToDG(OrderListDataGrid);
+            //для продуктов
+            ProductCollection.TakeProducts();
+            ProductCollection.ProductsToDG(ProductsDataGrid);
+            //для поставщиков
+            ProviderCollection.TakeProviders();
+            ProviderCollection.ProvidersToDG(ProviderDataGrid);
         }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {            
@@ -686,6 +692,249 @@ namespace hotelAdm
             {
                 ReverseBtnColor(btn);
                 HideGrid(StokGrid);
+            }
+        }
+        //ПРОДУКТЫ
+        //кнопки создания/удаления/редактирования продуктов
+        private void AddProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UnitCollection.TakeUnits();
+            UnitCollection.UnitsToBox(CreateProductUnitsComboBox);
+            ProductsControlBtnGrid.Visibility = Visibility.Hidden;
+            CreateProductGrid.Visibility = Visibility.Visible;
+        }
+
+        private void UpdateProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Product a = (Product)ProductsDataGrid.SelectedItem;
+            if (a != null)
+            {
+                ProductIdForUpdate.Text = a.Id.ToString();
+                UpdateProductNameTextBox.Text = a.Name;
+                UpdateProductCountTextBox.Text = a.Count.ToString();
+                //
+                UnitCollection.TakeUnits();
+                UnitCollection.UnitsToBox(UpdateProductUnitsComboBox);
+                UpdateProductUnitsComboBox.SelectedValue = a.Unit;
+                //
+                ProductsControlBtnGrid.Visibility = Visibility.Hidden;
+                UpdateProductGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Выберите продукт!");
+            }
+            ProductsDataGrid.SelectedItem = null;
+        }
+
+        private void DeleteProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Product a = (Product)ProductsDataGrid.SelectedItem;
+            if (a != null)
+            {
+                MessageBoxResult rt = MessageBox.Show($"Удалить продукт с id={a.Id.ToString()}?", "Удаление", MessageBoxButton.YesNo);
+                switch (rt)
+                {
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Load(true);
+                            ProductCollection.DeleteProduct(a.Id);
+                            ProductCollection.TakeProducts();
+                            ProductCollection.ProductsToDG(ProductsDataGrid);
+                            Load(false);
+                            MessageBox.Show("Продукт успешно удален!");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка");
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите продукт!");
+            }
+            ProductsDataGrid.SelectedItem = null;
+        }
+
+        //кнопки сохранения/отмены добавления нового продукта
+        private void CreateProductCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateProductCountTextBox.Clear();
+            CreateProductUnitsComboBox.Items.Clear();
+            CreateProductNameTextBox.Clear();
+            ProductsControlBtnGrid.Visibility = Visibility.Visible;
+            CreateProductGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void CreateProductSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ProductCollection.CreateProduct(CreateProductNameTextBox.Text, Convert.ToInt32(CreateProductCountTextBox.Text),UnitCollection.NameToId(CreateProductUnitsComboBox.SelectedValue.ToString()));
+                ProductCollection.TakeProducts();
+                ProductCollection.ProductsToDG(ProductsDataGrid);
+                //
+                CreateProductCountTextBox.Clear();
+                CreateProductUnitsComboBox.Items.Clear();
+                CreateProductNameTextBox.Clear();
+                ProductsControlBtnGrid.Visibility = Visibility.Visible;
+                CreateProductGrid.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        //кнопки сохранения/отмены редактирования продукта
+        private void UpdateProductCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ProductIdForUpdate.Clear();
+            UpdateProductUnitsComboBox.Items.Clear();
+            UpdateProductNameTextBox.Clear();
+            UpdateProductCountTextBox.Clear();
+            ProductsControlBtnGrid.Visibility = Visibility.Visible;
+            UpdateProductGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void UpdateProductSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ProductCollection.UpdateProduct(Convert.ToInt32(ProductIdForUpdate.Text), UpdateProductNameTextBox.Text, Convert.ToInt32(UpdateProductCountTextBox.Text), UnitCollection.NameToId(UpdateProductUnitsComboBox.SelectedValue.ToString()));
+                ProductCollection.TakeProducts();
+                ProductCollection.ProductsToDG(ProductsDataGrid);
+                //
+                ProductIdForUpdate.Clear();
+                UpdateProductUnitsComboBox.Items.Clear();
+                UpdateProductNameTextBox.Clear();
+                UpdateProductCountTextBox.Clear();
+                ProductsControlBtnGrid.Visibility = Visibility.Visible;
+                UpdateProductGrid.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        //ПОСТАВЩИКИ
+        //кнопки создания/удаления/редактирования поставщиков
+        private void AddProviderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ProviderControlBtnGrid.Visibility = Visibility.Hidden;
+            CreateProviderGrid.Visibility = Visibility.Visible;
+        }
+
+        private void UpdateProviderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Provider a = (Provider)ProviderDataGrid.SelectedItem;
+            if (a != null)
+            {
+                ProviderIdForUpdate.Text = a.Id.ToString();
+                UpdateProviderNameTextBox.Text = a.Name;
+                UpdateProviderTelTextBox.Text = a.Phone;
+                //
+                ProviderControlBtnGrid.Visibility = Visibility.Hidden;
+                UpdateProviderGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Выберите поставщика!");
+            }
+            ProviderDataGrid.SelectedItem = null;
+        }
+
+        private void DeleteProviderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Provider a = (Provider)ProviderDataGrid.SelectedItem;
+            if (a != null)
+            {
+                MessageBoxResult rt = MessageBox.Show($"Удалить поставщика с id={a.Id.ToString()}?", "Удаление", MessageBoxButton.YesNo);
+                switch (rt)
+                {
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Load(true);
+                            ProviderCollection.DeleteProvider(a.Id);
+                            ProviderCollection.TakeProviders();
+                            ProviderCollection.ProvidersToDG(ProviderDataGrid);
+                            Load(false);
+                            MessageBox.Show("Поставщик успешно удален!");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка");
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите поставщика!");
+            }
+            ProviderDataGrid.SelectedItem = null;
+        }
+        //кнопки сохранения/отмены добавления нового поставщика
+        private void CreateProviderCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ProviderControlBtnGrid.Visibility = Visibility.Visible;
+            CreateProviderGrid.Visibility = Visibility.Hidden;
+            CreateProviderNameTextBox.Clear();
+            CreateProviderTelTextBox.Clear();
+        }
+
+        private void CreateProviderSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ProviderCollection.CreateProvider(CreateProviderNameTextBox.Text, CreateProviderTelTextBox.Text);
+                ProviderCollection.TakeProviders();
+                ProviderCollection.ProvidersToDG(ProviderDataGrid);
+                //
+                ProviderControlBtnGrid.Visibility = Visibility.Visible;
+                CreateProviderGrid.Visibility = Visibility.Hidden;
+                CreateProviderNameTextBox.Clear();
+                CreateProviderTelTextBox.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        //кнопки сохранения/отмены редактирования поставщика
+        private void UpdateProviderCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ProviderIdForUpdate.Clear();
+            UpdateProviderNameTextBox.Clear();
+            UpdateProviderTelTextBox.Clear();
+            ProviderControlBtnGrid.Visibility = Visibility.Visible;
+            UpdateProviderGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void UpdateProviderSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ProviderCollection.UpdateProvider(Convert.ToInt32(ProviderIdForUpdate.Text), UpdateProviderNameTextBox.Text, UpdateProviderTelTextBox.Text);
+                ProviderCollection.TakeProviders();
+                ProviderCollection.ProvidersToDG(ProviderDataGrid);
+                //
+                ProviderIdForUpdate.Clear();
+                UpdateProviderNameTextBox.Clear();
+                UpdateProviderTelTextBox.Clear();
+                ProviderControlBtnGrid.Visibility = Visibility.Visible;
+                UpdateProviderGrid.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
