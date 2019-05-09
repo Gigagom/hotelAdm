@@ -74,6 +74,9 @@ namespace hotelAdm
             //для поставщиков
             ProviderCollection.TakeProviders();
             ProviderCollection.ProvidersToDG(ProviderDataGrid);
+            //для запросов к поставщикам
+            RequestCollection.TakeRequests();
+            RequestCollection.RequestSsToDG(RequestsDataGrid);
         }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {            
@@ -767,6 +770,7 @@ namespace hotelAdm
             CreateProductCountTextBox.Clear();
             CreateProductUnitsComboBox.Items.Clear();
             CreateProductNameTextBox.Clear();
+            CreateProductUnitsComboBox.Text = "Выберите";
             ProductsControlBtnGrid.Visibility = Visibility.Visible;
             CreateProductGrid.Visibility = Visibility.Hidden;
         }
@@ -935,6 +939,113 @@ namespace hotelAdm
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+        //кнопки создания/завешения/удаления запросов к поставщикам
+        private void AddRequestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ProductCollection.ProductsToCB(CreateRequestProductComboBox);
+            ProviderCollection.ProvidersToCB(CreateRequestProviderComboBox);
+            CreateRequestGrid.Visibility = Visibility.Visible;
+            RequestsControlBtnGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void UpdateRequestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Request a = (Request)RequestsDataGrid.SelectedItem;
+            if (a != null)
+            {
+                MessageBoxResult rt = MessageBox.Show($"Закрыть запрос с id={a.Id.ToString()}?", "Закрытие", MessageBoxButton.YesNo);
+                switch (rt)
+                {
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Load(true);
+                            RequestCollection.CloseRequest(a.Id, ProductCollection.NameToId(a.ProdName), a.Count);
+                            ProductCollection.TakeProducts();
+                            ProductCollection.ProductsToDG(ProductsDataGrid);
+                            RequestCollection.TakeRequests();
+                            RequestCollection.RequestSsToDG(RequestsDataGrid);
+                            Load(false);
+                            MessageBox.Show("Запрос успешно закрыт!");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка");
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запрос!");
+            }
+            RequestsDataGrid.SelectedItem = null;
+        }
+
+        private void DeleteRequestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Request a = (Request)RequestsDataGrid.SelectedItem;
+            if (a != null)
+            {
+                MessageBoxResult rt = MessageBox.Show($"Удалить запрос с id={a.Id.ToString()}?", "Удаление", MessageBoxButton.YesNo);
+                switch (rt)
+                {
+                    case MessageBoxResult.Yes:
+                        try
+                        {
+                            Load(true);
+                            RequestCollection.DeleteRequest(a.Id);
+                            RequestCollection.TakeRequests();
+                            RequestCollection.RequestSsToDG(RequestsDataGrid);
+                            Load(false);
+                            MessageBox.Show("Запрос успешно удален!");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка");
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запрос!");
+            }
+            RequestsDataGrid.SelectedItem = null;
+        }
+        //кнопки отмены/сохранения нового запроса
+        private void CreateRequestCanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateRequestProductComboBox.Text = "Выберите";
+            CreateRequestProviderComboBox.Text = "Выберите";
+            CreateRequestGrid.Visibility = Visibility.Hidden;
+            RequestsControlBtnGrid.Visibility = Visibility.Visible;
+        }
+
+        private void CreateRequestSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int prod = ProductCollection.NameToId(CreateRequestProductComboBox.SelectedValue.ToString());
+                int provider = ProviderCollection.NameToId(CreateRequestProviderComboBox.SelectedValue.ToString());
+                RequestCollection.CreateRequest(prod, Convert.ToInt32(CreateRequestCountTextBox.Text), provider);
+                RequestCollection.TakeRequests();
+                RequestCollection.RequestSsToDG(RequestsDataGrid);
+                //
+                CreateRequestProductComboBox.Text = "Выберите";
+                CreateRequestProviderComboBox.Text = "Выберите";
+                CreateRequestGrid.Visibility = Visibility.Hidden;
+                RequestsControlBtnGrid.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.Source);
             }
         }
     }

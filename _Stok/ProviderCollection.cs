@@ -42,6 +42,21 @@ namespace hotelAdm
             }
         }
 
+        public static void ProvidersToCB(System.Windows.Controls.ComboBox CB)
+        {
+            CB.Items.Clear();
+            foreach (Provider p in ProviderList)
+            {
+                CB.Items.Add(p.Name);
+            }
+        }
+
+        public static int NameToId(string _name)
+        {
+            Provider tmp = ProviderList.Find(x => x.Name == _name);
+            return tmp.Id;
+        }
+
         public static void CreateProvider(string _name, string _tel)
         {
             try

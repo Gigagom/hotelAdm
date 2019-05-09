@@ -44,6 +44,22 @@ namespace hotelAdm
                 DG.Items.Add(p);
             }
         }
+
+        public static void ProductsToCB(System.Windows.Controls.ComboBox CB)
+        {
+            CB.Items.Clear();
+            foreach (Product p in ProductsList)
+            {
+                CB.Items.Add(p.Name);
+            }
+        }
+
+        public static int NameToId(string _name)
+        {
+            Product tmp = ProductsList.Find(x => x.Name == _name);
+            return tmp.Id;
+        }
+
         public static void CreateProduct(string _name, int _count, int _units)
         {
             try

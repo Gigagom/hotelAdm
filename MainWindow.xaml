@@ -460,7 +460,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="StokGrid" Visibility="Visible" Background="White">
+                <Grid x:Name="StokGrid" Visibility="Hidden" Background="White">
                     <TabControl x:Name="StokTabs">
                         <TabItem x:Name="ProductsTab">
                             <TabItem.Header>
@@ -541,7 +541,7 @@
                                         </StackPanel>
                                         <StackPanel x:Name="CreateProductUnitsPanel" Grid.Row="1" Grid.Column="6">
                                             <Label Content="Единицы измерения"/>
-                                            <ComboBox x:Name="CreateProductUnitsComboBox"/>
+                                            <ComboBox x:Name="CreateProductUnitsComboBox"  IsEditable="True" IsReadOnly="True" Text="Выберите"/>
                                         </StackPanel>
                                         <Button x:Name="CreateProductCanselBtn" Content="Отменить" Grid.Column="4" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="CreateProductCanselBtn_Click"/>
                                         <Button x:Name="CreateProductSaveBtn" Content="Сохранить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="CreateProductSaveBtn_Click"/>
@@ -705,7 +705,85 @@
                             </TabItem.Header>
                             <TabItem.Content>
                                 <Grid>
-
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="6*"/>
+                                        <RowDefinition Height="3*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="1" Content="Список запросов" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                                    <Grid Grid.Column="1" Grid.Row="1">
+                                        <ScrollViewer>
+                                            <DataGrid  x:Name="RequestsDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                                                    <DataGridTextColumn Header="Наименование товара" Binding="{Binding Path=ProdName}"/>
+                                                    <DataGridTextColumn Header="Количество" Binding="{Binding Path=Count}"/>
+                                                    <DataGridTextColumn Header="Наименование поставщика" Binding="{Binding Path=ProviderName}"/>
+                                                    <DataGridTextColumn Header="Единицы состояние" Binding="{Binding Path=State}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </ScrollViewer>
+                                    </Grid>
+                                    <Grid x:Name="RequestsControlBtnGrid" Grid.Column="1" Grid.Row="2" Background="White" Visibility="Visible">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button x:Name="AddRequestBtn" Content="Создать" Grid.Row="1" Grid.Column="1" Style="{StaticResource ForAddBtn}" Click="AddRequestBtn_Click"/>
+                                        <Button x:Name="UpdateRequestBtn" Content="Закрыть" Grid.Row="1" Grid.Column="3" Style="{StaticResource ForEditBtn}" Click="UpdateRequestBtn_Click"/>
+                                        <Button x:Name="DeleteRequestBtn" Content="Удалить" Grid.Row="1" Grid.Column="5" Style="{StaticResource ForDeleteBtn}" Click="DeleteRequestBtn_Click"/>
+                                    </Grid>
+                                    <Grid x:Name="CreateRequestGrid" Grid.Column="1" Grid.Row="2" Visibility="Hidden">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="4*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="5*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="Добавление запроса" Grid.Column="2" Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center"/>
+                                        <StackPanel x:Name="CreateRequestProductPanel" Grid.Row="1" Grid.Column="2">
+                                            <Label Content="Продукт"/>
+                                            <ComboBox x:Name="CreateRequestProductComboBox" IsEditable="True" IsReadOnly="True" Text="Выберите"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateRequestCountPanel" Grid.Row="1" Grid.Column="4">
+                                            <Label Content="Количество"/>
+                                            <TextBox x:Name="CreateRequestCountTextBox" PreviewTextInput="NumberValidationTextBox"/>
+                                        </StackPanel>
+                                        <StackPanel x:Name="CreateRequestProviderPanel" Grid.Row="1" Grid.Column="6">
+                                            <Label Content="Поставщик"/>
+                                            <ComboBox x:Name="CreateRequestProviderComboBox" IsEditable="True" IsReadOnly="True" Text="Выберите"/>
+                                        </StackPanel>
+                                        <Button x:Name="CreateRequestCanselBtn" Content="Отменить" Grid.Column="4" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="CreateRequestCanselBtn_Click"/>
+                                        <Button x:Name="CreateRequestSaveBtn" Content="Сохранить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="CreateRequestSaveBtn_Click"/>
+                                    </Grid>
                                 </Grid>
                             </TabItem.Content>
                         </TabItem>
