@@ -118,5 +118,11 @@ namespace hotelAdm
                 throw new Exception(ex.Message + ex.Source + ex.TargetSite);
             }
         }
+
+        public static Apartment GetApartById(int _id)
+        {
+            Apartment tmp = Apartsments[_id];
+            return tmp;
+        }
     }
 }

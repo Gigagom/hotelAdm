@@ -84,12 +84,11 @@
     <Compile Include="_Orders\OrderCollection.cs" />
     <Compile Include="_Clients\Client.cs" />
     <Compile Include="_Clients\ClientCollection.cs" />
+    <Compile Include="_Orders\NewOrder.cs" />
     <Compile Include="_Stok\Product.cs" />
     <Compile Include="_Stok\ProductCollection.cs" />
     <Compile Include="_Stok\Unit.cs" />
     <Compile Include="_Stok\UnitCollection.cs" />
-    <Compile Include="_Stok\RequestState.cs" />
-    <Compile Include="_Stok\RequestStateCollection.cs" />
     <Compile Include="_Stok\Request.cs" />
     <Compile Include="_Stok\RequestCollection.cs" />
     <Compile Include="_Stok\Provider.cs" />

@@ -226,7 +226,7 @@ namespace hotelAdm
                     Button newBtn = new Button();
                     newBtn.Content = number.ToString();
                     newBtn.Name = "Button" + i.ToString() + j.ToString();
-                    newBtn.Height = 100;
+                    newBtn.Height = 150;
                     newBtn.Style = (Style)FindResource("ForApartButtons");
                     newBtn.Click += new RoutedEventHandler(hadler);
 
@@ -1047,6 +1047,181 @@ namespace hotelAdm
             {
                 MessageBox.Show(ex.Message, ex.Source);
             }
+        }
+
+        private void NewOfferBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (NewOfferGrid.Visibility != Visibility.Visible)
+            {
+                SetAllMenuButtonsToDefault();
+                HideAllGrids();
+                ReverseBtnColor(btn);
+                NewOfferGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ReverseBtnColor(btn);
+                HideGrid(NewOfferGrid);
+            }
+        }
+
+        private void ClientForSearchOKBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NewOrder.Clear();
+            if (ClientForSearchTextBox.Text != "")
+            {
+                NewOrder.Client = ClientCollection.TakeClientByPass(ClientForSearchTextBox.Text);
+                if (NewOrder.Client != null)
+                {
+                    SearchClientForNewOrderGrid.Visibility = Visibility.Hidden;
+                    ChooseApartsForNewOrderGrid.Visibility = Visibility.Visible;
+                    DrawButtons(ForAparts, HotelApartments.ApartmentsCount, 2, AddApartInList);
+                }
+                else
+                {
+                    MessageBoxResult rt = MessageBox.Show($"Клиент с введенным номером паспорта не найден. Создать нового?", "Новый клиент?", MessageBoxButton.YesNo);
+                    switch (rt)
+                    {
+                        case MessageBoxResult.Yes:
+                            PassNewClientNewOrder.Text = ClientForSearchTextBox.Text;
+                            NewClientForNewOrderGrid.Visibility = Visibility.Visible;
+                            SearchClientForNewOrderGrid.Visibility = Visibility.Hidden;
+                            break;
+                        case MessageBoxResult.No:
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите номер паспорта");
+            }
+        }
+
+        private void CancelAddingNewOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SearchClientForNewOrderGrid.Visibility = Visibility.Visible;
+            NewClientForNewOrderGrid.Visibility = Visibility.Hidden;
+            ChooseApartsForNewOrderGrid.Visibility = Visibility.Hidden;
+            ChooseDatesForNewOrderGrid.Visibility = Visibility.Hidden;
+            ConfirmNewOrderGrid.Visibility = Visibility.Hidden;
+            FIONewClientNewOrder.Clear();
+            PassNewClientNewOrder.Clear();
+            TelNewClientNewOrder.Clear();
+            ClientForSearchTextBox.Clear();
+            StartDayNewOrder.SelectedDate = null;
+            DaysCountNewOrder.Clear();
+            ConfirmFIONewOrder.Clear();
+            ConfirmPassNewOrder.Clear();
+            ConfirmTelNewOrder.Clear();
+            ConfirmApartsNewOrder.Clear();
+            ConfirmCountNewOrder.Clear();
+            ConfirmDataNewOrder.Clear();
+            ConfirmPriceNewOrder.Clear();
+            NewOrder.Clear();
+        }
+
+        private void SaveNewClientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ClientCollection.AddClient(FIONewClientNewOrder.Text, PassNewClientNewOrder.Text, TelNewClientNewOrder.Text);
+                ClientCollection.TakeClients();
+                ClientCollection.ClientsToDG(ClientsDataGrid);
+                NewOrder.Client = ClientCollection.TakeClientByPass(PassNewClientNewOrder.Text);
+
+                FIONewClientNewOrder.Clear();
+                PassNewClientNewOrder.Clear();
+                TelNewClientNewOrder.Clear();
+
+                HotelApartments.TakeApartments();
+                HotelApartments.SetApartmentsToGrid(ApartsDataGrid);
+                ApartTypeCollection.TakeApart();
+                CleaningTimeCollection.TakeTime();
+                DrawButtons(ApartsBtnGrid, HotelApartments.ApartmentsCount, 4, ShowNumberInfo);
+
+                NewClientForNewOrderGrid.Visibility = Visibility.Hidden;
+                ChooseApartsForNewOrderGrid.Visibility = Visibility.Visible;
+                DrawButtons(ForAparts, HotelApartments.ApartmentsCount, 2, AddApartInList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void AddApartInList(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (btn.Style == (Style)FindResource("ForApartButtons"))
+            {
+                btn.Style = (Style)FindResource("ForAddingButtons");
+                NewOrder.Aparts.Add(HotelApartments.GetApartById(Int32.Parse(btn.Content.ToString())));
+            }
+            else
+            {
+                var item = NewOrder.Aparts.SingleOrDefault(x => x.id == Int32.Parse(btn.Content.ToString()));
+                if (item != null)
+                    NewOrder.Aparts.Remove(item);
+                btn.Style = (Style)FindResource("ForApartButtons");
+            }
+        }
+        private void SaveApartsListBtn_Click(object sender, RoutedEventArgs e)
+        {            
+            if (NewOrder.Aparts.Count > 0)
+            {
+                MessageBoxResult rt = MessageBox.Show($"Закончить выбор номеров?", "Закончить?", MessageBoxButton.YesNo);
+                switch (rt)
+                {
+                    case MessageBoxResult.Yes:
+                        ChooseApartsForNewOrderGrid.Visibility = Visibility.Hidden;
+                        ChooseDatesForNewOrderGrid.Visibility = Visibility.Visible;
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите хотя бы 1 номер!");
+            }
+        }
+
+        private void SaveDateInfoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NewOrder.StartDay = StartDayNewOrder.Text.ToString();
+            NewOrder.DaysCount = Int32.Parse(DaysCountNewOrder.Text);
+            NewOrder.SetPrice();
+            ConfirmFIONewOrder.Text = NewOrder.Client.Name;
+            ConfirmPassNewOrder.Text = NewOrder.Client.Passport_number;
+            ConfirmTelNewOrder.Text = NewOrder.Client.Phone;
+            ConfirmApartsNewOrder.Text = NewOrder.GetApartList();
+            ConfirmCountNewOrder.Text = NewOrder.DaysCount.ToString();
+            ConfirmDataNewOrder.Text = NewOrder.StartDay;
+            ConfirmPriceNewOrder.Text = NewOrder.Price.ToString();
+            ChooseDatesForNewOrderGrid.Visibility = Visibility.Hidden;
+            ConfirmNewOrderGrid.Visibility = Visibility.Visible;
+        }
+
+        private void SaveNewClientBtn1_Click(object sender, RoutedEventArgs e)
+        {
+            //вотутасохраняем
+            FIONewClientNewOrder.Clear();
+            PassNewClientNewOrder.Clear();
+            TelNewClientNewOrder.Clear();
+            ClientForSearchTextBox.Clear();
+            StartDayNewOrder.SelectedDate = null;
+            DaysCountNewOrder.Clear();
+            ConfirmFIONewOrder.Clear();
+            ConfirmPassNewOrder.Clear();
+            ConfirmTelNewOrder.Clear();
+            ConfirmApartsNewOrder.Clear();
+            ConfirmCountNewOrder.Clear();
+            ConfirmDataNewOrder.Clear();
+            ConfirmPriceNewOrder.Clear();
+            NewOrder.Clear();
+            ConfirmNewOrderGrid.Visibility = Visibility.Hidden;
+            SearchClientForNewOrderGrid.Visibility = Visibility.Visible;
         }
     }
 }

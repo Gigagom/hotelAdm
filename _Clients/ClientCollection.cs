@@ -35,6 +35,18 @@ namespace hotelAdm
             }
             
         }
+        public static void AddClient(string _name, string _pass, string _tel)
+        {
+            try
+            {
+                string query = $"INSERT INTO `hotel`.`guests` (`guest_name`, `passport_num`, `guest_tel`) VALUES ('{_name}', '{_pass}', '{_tel}');";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static string TakePassById(int _id)
         {
             try
@@ -48,6 +60,19 @@ namespace hotelAdm
                         return item["passport_num"];
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + ex.Source + ex.TargetSite);
+            }
+            return null;
+        }
+        public static Client TakeClientByPass(string _pass)
+        {
+            try
+            {
+                Client tmp = ClientsList.Find(x => x.Passport_number == _pass);
+                return tmp;
             }
             catch (Exception ex)
             {

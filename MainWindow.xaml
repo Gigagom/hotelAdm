@@ -24,7 +24,7 @@
                 </Grid>
                 <Grid x:Name="MenuBox" Grid.Row="1">
                     <StackPanel x:Name="MenuButtons">
-                        <Button x:Name="NewOfferBtn" Content="Новый заказ" Style="{StaticResource ForMenuButtons}"/>
+                        <Button x:Name="NewOfferBtn" Content="Новый заказ" Style="{StaticResource ForMenuButtons}" Click="NewOfferBtn_Click"/>
                         <Button x:Name="ApartsBtn" Content="Номера" Style="{StaticResource ForMenuButtons}" Click="ApartsBtn_Click"/>
                         <Button x:Name="OffersBtn" Content="Список заказов" Style="{StaticResource ForMenuButtons}" Click="OffersBtn_Click"/>
                         <Button x:Name="StokBtn" Content="Склад" Style="{StaticResource ForMenuButtons}" Click="StokBtn_Click"/>
@@ -78,7 +78,7 @@
                                         </StackPanel>
                                         <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                             <Button x:Name="SaveSettingsBtn" Content="Сохранить" Style="{StaticResource ForMenuButtons}" Click="SaveSettingsBtn_Click"/>
-                                        </Grid>                                        
+                                        </Grid>
                                     </Grid>
                                     <Button x:Name="SaveDBBtn" Content="Резервная копия" Grid.Column="2" Grid.Row="2" Style="{StaticResource ForMenuButtons}" Click="SaveDBBtn_Click"/>
                                 </Grid>
@@ -320,7 +320,7 @@
                                                 <Label Content="Цена"/>
                                                 <TextBox x:Name="UpdateApartCostTextBox" PreviewTextInput="NumberValidationTextBox"/>
                                             </StackPanel>
-                                        </Grid>                                                                               
+                                        </Grid>
                                         <Button x:Name="UpdateApartCanselBtn" Content="Отменить" Grid.Column="6" Grid.Row="3" Style="{StaticResource ForDeleteBtn}" Click="UpdateApartCanselBtn_Click"/>
                                         <Button x:Name="UpdateApartSaveBtn" Content="Сохранить" Grid.Column="8" Grid.Row="3" Style="{StaticResource ForAddBtn}" Click="UpdateApartSaveBtn_Click"/>
                                     </Grid>
@@ -423,12 +423,169 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="1" Content="Номера" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
-                    <Grid Grid.Row="1" Grid.Column="1" x:Name="ApartsBtnGrid">
-
-                    </Grid>
+                    <ScrollViewer Grid.Row="1" Grid.Column="1">
+                        <Grid  x:Name="ApartsBtnGrid">
+                            
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
                 <Grid x:Name="NewOfferGrid" Visibility="Hidden" Background="White">
-
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Добавление нового заказа" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36"/>
+                    <Button x:Name="CancelAddingNewOrderBtn" Content="Отмена" Grid.Row="2" Grid.Column="2" Style="{StaticResource ForDeleteBtn}" Margin="10,10,10,10" Click="CancelAddingNewOrderBtn_Click"/>
+                    <Grid x:Name="SearchClientForNewOrderGrid" Grid.Column="1" Grid.Row="1" Visibility="Visible">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="1" Grid.Column="1">
+                            <Label Content="Введите номер паспорта клиента" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                            <TextBox x:Name="ClientForSearchTextBox" Style="{StaticResource LoginTextBoxes}" Template="{StaticResource LoginTextBoxesBorder}"/>
+                            <Button x:Name="ClientForSearchOKBtn" Content="OK" Style="{StaticResource ForMenuButtons}" Margin="150,15,150,15" Click="ClientForSearchOKBtn_Click"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid x:Name="NewClientForNewOrderGrid" Grid.Column="1" Grid.Row="1" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Новый клиент"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.ColumnSpan="3"/>
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBox Text="ФИО" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="№ пасспорта" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="№ телефона" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBox x:Name="FIONewClientNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                                <TextBox x:Name="PassNewClientNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                                <TextBox x:Name="TelNewClientNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                            </StackPanel>
+                            <Button x:Name="SaveNewClientBtn" Content="Сохранить" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ForAddBtn}" Margin="170,10,170,100" Click="SaveNewClientBtn_Click"/>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="ChooseApartsForNewOrderGrid" Grid.Column="1" Grid.Row="1" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Выберите номера"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.ColumnSpan="3"/>
+                        <ScrollViewer Grid.Column="1" Grid.Row="1">
+                            <Grid x:Name="ForAparts">
+                                
+                            </Grid>
+                        </ScrollViewer>
+                        <Button x:Name="SaveApartsListBtn" Content="ОК" Grid.Column="2" Grid.Row="2" Style="{StaticResource ForAddBtn}" Margin="10,10,10,10" Click="SaveApartsListBtn_Click"/>
+                    </Grid>
+                    <Grid x:Name="ChooseDatesForNewOrderGrid" Grid.Column="1" Grid.Row="1" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Выберите дату начала и количество дней"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.ColumnSpan="3"/>
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBox Text="Дата начала" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="Количество дней" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <DatePicker x:Name="StartDayNewOrder" FontSize ="14" Margin="5,0,0,15"/>
+                                <TextBox x:Name="DaysCountNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"  PreviewTextInput="NumberValidationTextBox"/>
+                            </StackPanel>
+                            <Button x:Name="SaveDateInfoBtn" Content="Сохранить" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ForAddBtn}" Margin="170,10,170,100" Click="SaveDateInfoBtn_Click"/>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="ConfirmNewOrderGrid" Grid.Column="1" Grid.Row="1" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Проверьте данные"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.ColumnSpan="3"/>
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="6*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBox Text="ФИО" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="№ пасспорта" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="№ телефона" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="Список номеров" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="Количество дней" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="Дата начала" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                                <TextBox Text="Итого" IsEnabled="False" Style="{StaticResource ForApartInfoLeftTextboxes}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBox x:Name="ConfirmFIONewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                                <TextBox x:Name="ConfirmPassNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                                <TextBox x:Name="ConfirmTelNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                                <TextBox x:Name="ConfirmApartsNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                                <TextBox x:Name="ConfirmCountNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                                <TextBox x:Name="ConfirmDataNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                                <TextBox x:Name="ConfirmPriceNewOrder" Style="{StaticResource ForApartInfoRightTextboxes}"/>
+                            </StackPanel>
+                            <Button x:Name="SaveNewClientBtn1" Content="Сохранить" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ForAddBtn}" Click="SaveNewClientBtn1_Click"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <Grid x:Name="OfferListGrid" Visibility="Hidden" Background="White">
                     <Grid.RowDefinitions>
@@ -814,10 +971,10 @@
                             <ScrollViewer>
                                 <DataGrid  x:Name="ClientsDataGrid" IsReadOnly="True" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
             RowBackground="LightGray" AlternatingRowBackground="White" FontSize="14">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
-                                            <DataGridTextColumn Header="ФИО" Binding="{Binding Path=Name}"/>
-                                            <DataGridTextColumn Header="№ паспорта" Binding="{Binding Path=Passport_number}"/>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                                        <DataGridTextColumn Header="ФИО" Binding="{Binding Path=Name}"/>
+                                        <DataGridTextColumn Header="№ паспорта" Binding="{Binding Path=Passport_number}"/>
                                         <DataGridTextColumn Header="Телефон" Binding="{Binding Path=Phone}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>

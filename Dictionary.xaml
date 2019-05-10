@@ -47,6 +47,19 @@
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
+    <Style x:Key="ForAddingButtons" TargetType="{x:Type Button}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+        </Style.Resources>
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Green"/>
+        <Setter Property="Margin" Value="5,15,5,15"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
     <Style x:Key="ForAddBtn" TargetType="{x:Type Button}">
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
