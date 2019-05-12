@@ -24,12 +24,12 @@
                 </Grid>
                 <Grid x:Name="MenuBox" Grid.Row="1">
                     <StackPanel x:Name="MenuButtons">
-                        <Button x:Name="NewOfferBtn" Content="Новый заказ" Style="{StaticResource ForMenuButtons}" Click="NewOfferBtn_Click"/>
-                        <Button x:Name="ApartsBtn" Content="Номера" Style="{StaticResource ForMenuButtons}" Click="ApartsBtn_Click"/>
-                        <Button x:Name="OffersBtn" Content="Список заказов" Style="{StaticResource ForMenuButtons}" Click="OffersBtn_Click"/>
-                        <Button x:Name="StokBtn" Content="Склад" Style="{StaticResource ForMenuButtons}" Click="StokBtn_Click"/>
-                        <Button x:Name="GuestsBtn" Content="Клиенты" Style="{StaticResource ForMenuButtons}" Click="GuestsBtn_Click"/>
-                        <Button x:Name="SBSettingsBtn" Content="Настройки"  Style="{StaticResource ForMenuButtons}" Click="SBSettingsBtn_Click" Margin="7,15,3.4,15"/>
+                        <Button x:Name="NewOfferBtn" Content="Новый заказ" Style="{StaticResource ForMenuButtons}" Click="NewOfferBtn_Click" Visibility="Collapsed"/>
+                        <Button x:Name="ApartsBtn" Content="Номера" Style="{StaticResource ForMenuButtons}" Click="ApartsBtn_Click" Visibility="Collapsed"/>
+                        <Button x:Name="OffersBtn" Content="Список заказов" Style="{StaticResource ForMenuButtons}" Click="OffersBtn_Click" Visibility="Collapsed"/>
+                        <Button x:Name="StokBtn" Content="Склад" Style="{StaticResource ForMenuButtons}" Click="StokBtn_Click" Visibility="Collapsed"/>
+                        <Button x:Name="GuestsBtn" Content="Клиенты" Style="{StaticResource ForMenuButtons}" Click="GuestsBtn_Click" Visibility="Collapsed"/>
+                        <Button x:Name="SBSettingsBtn" Content="Настройки"  Style="{StaticResource ForMenuButtons}" Click="SBSettingsBtn_Click" Margin="7,15,3.4,15" Visibility="Collapsed"/>
                     </StackPanel>
                 </Grid>
             </Grid>

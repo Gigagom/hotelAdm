@@ -46,11 +46,72 @@ namespace hotelAdm
                 case "Admin":
                     SetAdminContent();
                     break;
+                case "StokWorker":
+                    SetStokWorkerContent();
+                    break;
+                case "ReceptionWorker":
+                    SetBasicContent();
+                    break;
             }
         }
-
+        private void SetBasicContent()
+        {
+            NewOfferBtn.Visibility = Visibility.Visible;
+            ApartsBtn.Visibility = Visibility.Visible;
+            OffersBtn.Visibility = Visibility.Visible;
+            GuestsBtn.Visibility = Visibility.Visible;
+            //для номеров
+            HotelApartments.TakeApartments();
+            HotelApartments.SetApartmentsToGrid(ApartsDataGrid);
+            ApartTypeCollection.TakeApart();
+            CleaningTimeCollection.TakeTime();
+            DrawButtons(ApartsBtnGrid, HotelApartments.ApartmentsCount, 4, ShowNumberInfo);
+            //для клиентов
+            ClientCollection.TakeClients();
+            ClientCollection.ClientsToDG(ClientsDataGrid);
+            //для заказов
+            OrderCollection.TakeOrders();
+            OrderCollection.OrdersToDG(OrderListDataGrid);
+        }
+        private void SetStokWorkerContent()
+        {
+            ApartsBtn.Visibility = Visibility.Visible;
+            OffersBtn.Visibility = Visibility.Visible;
+            StokBtn.Visibility = Visibility.Visible;
+            GuestsBtn.Visibility = Visibility.Visible;
+            //для номеров
+            HotelApartments.TakeApartments();
+            HotelApartments.SetApartmentsToGrid(ApartsDataGrid);
+            ApartTypeCollection.TakeApart();
+            CleaningTimeCollection.TakeTime();
+            DrawButtons(ApartsBtnGrid, HotelApartments.ApartmentsCount, 4, ShowNumberInfo);
+            //для клиентов
+            ClientCollection.TakeClients();
+            ClientCollection.ClientsToDG(ClientsDataGrid);
+            //для заказов
+            OrderCollection.TakeOrders();
+            OrderCollection.OrdersToDG(OrderListDataGrid);
+            //для продуктов
+            ProductCollection.TakeProducts();
+            ProductCollection.ProductsToDG(ProductsDataGrid);
+            //для поставщиков
+            ProviderCollection.TakeProviders();
+            ProviderCollection.ProvidersToDG(ProviderDataGrid);
+            //для запросов к поставщикам
+            RequestCollection.TakeRequests();
+            RequestCollection.RequestSsToDG(RequestsDataGrid);
+        }
         private void SetAdminContent()
         {
+            //****Buttons****//
+            NewOfferBtn.Visibility = Visibility.Visible;
+            ApartsBtn.Visibility = Visibility.Visible;
+            OffersBtn.Visibility = Visibility.Visible;
+            StokBtn.Visibility = Visibility.Visible;
+            GuestsBtn.Visibility = Visibility.Visible;
+            SBSettingsBtn.Visibility = Visibility.Visible;
+            //****Buttons****//
+            //****Set Data*****//
             //для номеров
             HotelApartments.TakeApartments();
             HotelApartments.SetApartmentsToGrid(ApartsDataGrid);
@@ -77,6 +138,7 @@ namespace hotelAdm
             //для запросов к поставщикам
             RequestCollection.TakeRequests();
             RequestCollection.RequestSsToDG(RequestsDataGrid);
+            //****Set Data*****//
         }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {            
@@ -1205,23 +1267,35 @@ namespace hotelAdm
 
         private void SaveNewClientBtn1_Click(object sender, RoutedEventArgs e)
         {
-            //вотутасохраняем
-            FIONewClientNewOrder.Clear();
-            PassNewClientNewOrder.Clear();
-            TelNewClientNewOrder.Clear();
-            ClientForSearchTextBox.Clear();
-            StartDayNewOrder.SelectedDate = null;
-            DaysCountNewOrder.Clear();
-            ConfirmFIONewOrder.Clear();
-            ConfirmPassNewOrder.Clear();
-            ConfirmTelNewOrder.Clear();
-            ConfirmApartsNewOrder.Clear();
-            ConfirmCountNewOrder.Clear();
-            ConfirmDataNewOrder.Clear();
-            ConfirmPriceNewOrder.Clear();
-            NewOrder.Clear();
-            ConfirmNewOrderGrid.Visibility = Visibility.Hidden;
-            SearchClientForNewOrderGrid.Visibility = Visibility.Visible;
+            try
+            {
+                NewOrder.Save();
+                OrderCollection.TakeOrders();
+                OrderCollection.OrdersToDG(OrderListDataGrid);
+                //для продуктов
+                ProductCollection.TakeProducts();
+                ProductCollection.ProductsToDG(ProductsDataGrid);
+                FIONewClientNewOrder.Clear();
+                PassNewClientNewOrder.Clear();
+                TelNewClientNewOrder.Clear();
+                ClientForSearchTextBox.Clear();
+                StartDayNewOrder.SelectedDate = null;
+                DaysCountNewOrder.Clear();
+                ConfirmFIONewOrder.Clear();
+                ConfirmPassNewOrder.Clear();
+                ConfirmTelNewOrder.Clear();
+                ConfirmApartsNewOrder.Clear();
+                ConfirmCountNewOrder.Clear();
+                ConfirmDataNewOrder.Clear();
+                ConfirmPriceNewOrder.Clear();
+                NewOrder.Clear();
+                ConfirmNewOrderGrid.Visibility = Visibility.Hidden;
+                SearchClientForNewOrderGrid.Visibility = Visibility.Visible;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

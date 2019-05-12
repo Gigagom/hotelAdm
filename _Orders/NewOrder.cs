@@ -40,5 +40,35 @@ namespace hotelAdm
             tmp = tmp.TrimEnd(new char[] { ',', ' ' });
             return tmp;
         }
+        public static void Save()
+        {
+            try
+            {
+                int _id = 0;
+                string query = $"call hotel.NewOrder({DaysCount},{Client.Id},{Price},'{StartDay}');";
+                List<Dictionary<string, string>> UR = Database.Select(query, new string[] { "_last" });
+                if (UR.Count != 0)
+                {
+                    foreach (var item in UR)
+                    {
+                        _id =  Int32.Parse(item["_last"]);
+                    }
+                }
+                query = null;
+                foreach(Apartment a in Aparts)
+                {
+                    query += $"INSERT INTO `hotel`.`orders_to_apart_connect` (`order_id`, `apart_id`) VALUES ({_id}, {a.id}); ";
+                }
+                Database.Insert(query);
+
+                query = null;
+                query = $"call hotel.RemoveProducts({Aparts.Count*DaysCount});";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
