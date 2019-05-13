@@ -149,9 +149,10 @@ namespace hotelAdm
                         CurrrentUser.password = item["password"];
                         CurrrentUser.Name = item["FIO"];
                         CurrrentUser.Type = item["type"];
-                        CurrrentUser.Position = item["position_name"];
-                        return true;
+                        CurrrentUser.Position = item["position_name"];                        
                     }
+                    LogAuthorization();
+                    return true;
                 }
                 return false;
             }
@@ -159,6 +160,19 @@ namespace hotelAdm
             {
                 throw new Exception(ex.Message);
             }         
+        }
+
+        static private void LogAuthorization()
+        {
+            try
+            {
+                string query = $"INSERT INTO `hotel`.`action_log` (`time`, `action_text`, `table`, `id_entity`) VALUES (now(), 'Авторизован пользователь', 'users', {id});";
+                Database.Insert(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

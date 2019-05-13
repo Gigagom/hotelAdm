@@ -22,7 +22,9 @@ namespace hotelAdm
                 {
                     ActionLog ur = new ActionLog(Int32.Parse(item["id"]),
                                   item["time"],
-                                  item["action_text"]);
+                                  item["action_text"],
+                                  item["table"],
+                                  item["id_entity"]);
                     ActionLogList.Add(ur);
                 }
             }

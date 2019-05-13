@@ -406,6 +406,8 @@
                                                     <DataGridTextColumn Header="№" Binding="{Binding Path=Id}"/>
                                                     <DataGridTextColumn Header="Время" Binding="{Binding Path=Time}"/>
                                                     <DataGridTextColumn Header="Сообщение" Binding="{Binding Path=Text}"/>
+                                                    <DataGridTextColumn Header="Таблица" Binding="{Binding Path=Table}"/>
+                                                    <DataGridTextColumn Header="ID в таблице" Binding="{Binding Path=IdInTable}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </ScrollViewer>
