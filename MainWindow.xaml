@@ -80,7 +80,8 @@
                                             <Button x:Name="SaveSettingsBtn" Content="Сохранить" Style="{StaticResource ForMenuButtons}" Click="SaveSettingsBtn_Click"/>
                                         </Grid>
                                     </Grid>
-                                    <Button x:Name="SaveDBBtn" Content="Резервная копия" Grid.Column="2" Grid.Row="2" Style="{StaticResource ForMenuButtons}" Click="SaveDBBtn_Click"/>
+                                    <Button x:Name="SaveDBBtn" Content="Резервная копия" Grid.Column="2" Grid.Row="2" Style="{StaticResource ForMenuButtons}" Click="SaveDBBtn_Click" Margin="10,50.8,9.6,10.4"/>
+                                    <Button x:Name="AnyQueryBtn" Content="Пользовательские запросы" Grid.Column="1" Grid.Row="2" Style="{StaticResource ForMenuButtons}"  Margin="131.2,50.8,10,10.4" Click="AnyQueryBtn_Click"/>
                                 </Grid>
                             </TabItem.Content>
                         </TabItem>

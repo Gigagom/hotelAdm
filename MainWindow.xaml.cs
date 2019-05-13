@@ -17,6 +17,7 @@ using System.Configuration;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace hotelAdm
 {
@@ -1296,6 +1297,16 @@ namespace hotelAdm
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void AnyQueryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string a = AppDomain.CurrentDomain.BaseDirectory;
+            a += @"AnyQuery\AnyQuery.exe";
+            Process p = new Process();
+            p.StartInfo.FileName = a;
+            p.Start();
+            Application.Current.Shutdown();
         }
     }
 }
