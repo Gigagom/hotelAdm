@@ -259,6 +259,13 @@ namespace hotelAdm
             }                
         }
 
+        public void Load(Task t)
+        {
+            Action action = () => LoadindGrid.Visibility = Visibility.Hidden;
+            LoadindGrid.Dispatcher.Invoke(action);
+            Thread.Sleep(3000);
+        }
+
         public void DrawButtons(Grid Target, double count, double columns, RoutedEventHandler hadler)
         {
             Target.Children.Clear();
@@ -1307,6 +1314,19 @@ namespace hotelAdm
             p.StartInfo.FileName = a;
             p.Start();
             Application.Current.Shutdown();
+        }
+
+        private void ReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ExcelReport.Create();
+                MessageBox.Show("Отчет сформирован!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

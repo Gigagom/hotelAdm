@@ -21,3 +21,4 @@ E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\MySql.D
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\WpfAnimatedGif.dll
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\WpfAnimatedGif.xml
 E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\bin\Debug\MySqlBackup.dll
+E:\Учебка\2 курс\БД\курсач\hotelAdm\hotelAdm\obj\Debug\hotelAdm.csproj.ResolveComReference.cache

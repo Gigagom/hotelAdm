@@ -80,8 +80,11 @@
                                             <Button x:Name="SaveSettingsBtn" Content="Сохранить" Style="{StaticResource ForMenuButtons}" Click="SaveSettingsBtn_Click"/>
                                         </Grid>
                                     </Grid>
-                                    <Button x:Name="SaveDBBtn" Content="Резервная копия" Grid.Column="2" Grid.Row="2" Style="{StaticResource ForMenuButtons}" Click="SaveDBBtn_Click" Margin="10,50.8,9.6,10.4"/>
-                                    <Button x:Name="AnyQueryBtn" Content="Пользовательские запросы" Grid.Column="1" Grid.Row="2" Style="{StaticResource ForMenuButtons}"  Margin="131.2,50.8,10,10.4" Click="AnyQueryBtn_Click"/>
+                                    <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal">
+                                        <Button x:Name="SaveDBBtn" Content="Резервная копия" Style="{StaticResource ForMenuButtons}" Click="SaveDBBtn_Click" Margin="5,57,5,15.2" Width="239"/>
+                                        <Button x:Name="AnyQueryBtn" Content="Пользовательские запросы" Style="{StaticResource ForMenuButtons}" Click="AnyQueryBtn_Click" Margin="5,57,5,15.2" Width="357"/>
+                                        <Button x:Name="ReportBtn" Content="Отчет" Style="{StaticResource ForMenuButtons}" Margin="5,57,5,15.2" Width="108" Click="ReportBtn_Click"/>
+                                    </StackPanel>
                                 </Grid>
                             </TabItem.Content>
                         </TabItem>
@@ -426,7 +429,7 @@
                     <Label Grid.Column="1" Content="Номера" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
                     <ScrollViewer Grid.Row="1" Grid.Column="1">
                         <Grid  x:Name="ApartsBtnGrid">
-                            
+
                         </Grid>
                     </ScrollViewer>
                 </Grid>
@@ -508,7 +511,7 @@
                         <Label Content="Выберите номера"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.ColumnSpan="3"/>
                         <ScrollViewer Grid.Column="1" Grid.Row="1">
                             <Grid x:Name="ForAparts">
-                                
+
                             </Grid>
                         </ScrollViewer>
                         <Button x:Name="SaveApartsListBtn" Content="ОК" Grid.Column="2" Grid.Row="2" Style="{StaticResource ForAddBtn}" Margin="10,10,10,10" Click="SaveApartsListBtn_Click"/>
