@@ -34,6 +34,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="DataGrid" Grid.Column="1">
+                <Image Source="img/logo.png" Margin="245,146,245,146"/>
                 <Grid x:Name="SettingsGrid" Visibility="Hidden" Background="White">
                     <TabControl x:Name="DBSettingsTab">
                         <TabItem x:Name="ConnectionSettings">
