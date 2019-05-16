@@ -57,6 +57,7 @@ namespace hotelAdm
         }
         private void SetBasicContent()
         {
+            CurrrentUser.SetLabels(NameLabel, PositionLabel);
             NewOfferBtn.Visibility = Visibility.Visible;
             ApartsBtn.Visibility = Visibility.Visible;
             OffersBtn.Visibility = Visibility.Visible;
@@ -76,6 +77,7 @@ namespace hotelAdm
         }
         private void SetStokWorkerContent()
         {
+            CurrrentUser.SetLabels(NameLabel, PositionLabel);
             ApartsBtn.Visibility = Visibility.Visible;
             OffersBtn.Visibility = Visibility.Visible;
             StokBtn.Visibility = Visibility.Visible;
@@ -147,7 +149,7 @@ namespace hotelAdm
             {
                 string enteredLogin = LoginTextbox.Text;
                 string enteredPassword = PasswordTextbox.Password.ToString();
-                Task task = Task.Factory.StartNew(() => Load(true));                
+                Load(true);                
                 if (CurrrentUser.Authorization(enteredLogin, enteredPassword))
                 {
                     SetContent();
@@ -165,7 +167,7 @@ namespace hotelAdm
             }
             finally
             {
-                Task task = Task.Factory.StartNew(() => Load(false));
+                Load(false);
             }
         }
 
