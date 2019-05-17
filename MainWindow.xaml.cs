@@ -1261,18 +1261,32 @@ namespace hotelAdm
 
         private void SaveDateInfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            NewOrder.StartDay = StartDayNewOrder.Text.ToString();
-            NewOrder.DaysCount = Int32.Parse(DaysCountNewOrder.Text);
-            NewOrder.SetPrice();
-            ConfirmFIONewOrder.Text = NewOrder.Client.Name;
-            ConfirmPassNewOrder.Text = NewOrder.Client.Passport_number;
-            ConfirmTelNewOrder.Text = NewOrder.Client.Phone;
-            ConfirmApartsNewOrder.Text = NewOrder.GetApartList();
-            ConfirmCountNewOrder.Text = NewOrder.DaysCount.ToString();
-            ConfirmDataNewOrder.Text = NewOrder.StartDay;
-            ConfirmPriceNewOrder.Text = NewOrder.Price.ToString();
-            ChooseDatesForNewOrderGrid.Visibility = Visibility.Hidden;
-            ConfirmNewOrderGrid.Visibility = Visibility.Visible;
+            try
+            {
+                if ((StartDayNewOrder.Text != String.Empty)&&(DaysCountNewOrder.Text != String.Empty))
+                {
+                    NewOrder.StartDay = StartDayNewOrder.Text.ToString();
+                    NewOrder.DaysCount = Int32.Parse(DaysCountNewOrder.Text);
+                    NewOrder.SetPrice();
+                    ConfirmFIONewOrder.Text = NewOrder.Client.Name;
+                    ConfirmPassNewOrder.Text = NewOrder.Client.Passport_number;
+                    ConfirmTelNewOrder.Text = NewOrder.Client.Phone;
+                    ConfirmApartsNewOrder.Text = NewOrder.GetApartList();
+                    ConfirmCountNewOrder.Text = NewOrder.DaysCount.ToString();
+                    ConfirmDataNewOrder.Text = NewOrder.StartDay;
+                    ConfirmPriceNewOrder.Text = NewOrder.Price.ToString();
+                    ChooseDatesForNewOrderGrid.Visibility = Visibility.Hidden;
+                    ConfirmNewOrderGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessageBox.Show("Заполните все поля!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void SaveNewClientBtn1_Click(object sender, RoutedEventArgs e)
